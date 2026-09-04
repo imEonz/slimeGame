@@ -96,9 +96,9 @@ GameObject:
   - component: {fileID: 6688542505063714460}
   - component: {fileID: -8954539984011150311}
   - component: {fileID: -3772195231022318803}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,10 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741317c43d8919d4792e35cfa531521f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 0
-  curHP: 0
+  maxHP: 40
+  curHP: 40
   player: {fileID: 0}
   rb: {fileID: -8954539984011150311}
+  em: {fileID: 0}
 --- !u!50 &-8954539984011150311
 Rigidbody2D:
   serializedVersion: 4

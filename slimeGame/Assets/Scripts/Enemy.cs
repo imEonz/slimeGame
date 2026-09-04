@@ -12,9 +12,11 @@ public class Enemy : MonoBehaviour
     private float speed = 5f;
     private float xRange = 25f;
     private float yRange = 12.5f;
+    public EnemyManager em;
 
     void Start()
     {
+        curHP = maxHP;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         transform.position = new Vector2(Random.Range(-xRange,xRange), Random.Range(-yRange,yRange));
     }
@@ -25,5 +27,15 @@ public class Enemy : MonoBehaviour
         dir = dir.normalized;
         Vector2 nextPos = (Vector2)transform.position + dir * speed * Time.deltaTime;
         rb.MovePosition(nextPos);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        curHP -= damage;
+        if(curHP <= 0)
+        {
+            em.enemies.Remove(this);
+            Destroy(gameObject);
+        }
     }
 }

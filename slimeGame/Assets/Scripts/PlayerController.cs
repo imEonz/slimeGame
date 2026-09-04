@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+
+
     [SerializeField]
     private Rigidbody2D rb;
     [SerializeField]
@@ -35,7 +37,6 @@ public class PlayerController : MonoBehaviour
     private void OnDash(InputValue playerInput)
     {
         dashInput = playerInput.Get<float>();
-        Debug.Log(dashInput);
     }
 
     private void FixedUpdate()

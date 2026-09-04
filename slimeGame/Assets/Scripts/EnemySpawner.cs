@@ -40,7 +40,9 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < spawnAmount; i++)
         {
             GameObject enemy = Instantiate(enemyPrefab, enemiesFolder, true);
-            em.enemies.Add(enemy.GetComponent<Enemy>());
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            enemyScript.em = em;
+            em.enemies.Add(enemyScript);
         }
     }
 }
