@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
         if(deathTimer > 20) Destroy(gameObject);
         MoveTowardsTarget();
 
+        if(target == null) Destroy(gameObject);
     }
 
     private void MoveTowardsTarget()
