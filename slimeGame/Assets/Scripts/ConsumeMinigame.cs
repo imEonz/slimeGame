@@ -18,6 +18,8 @@ public class ConsumeMinigame : MonoBehaviour
     private float consumeFigherScale;
     [SerializeField]
     EnemyManager enemyManager;
+    [SerializeField]
+    CameraFollow camera;
     Enemy targetEnemy;
     private Action<bool> onComplete;
 
@@ -41,6 +43,7 @@ public class ConsumeMinigame : MonoBehaviour
         if (!root.activeSelf) return;
 
         progressSlider.value += dashAmount;
+        camera.Shake();
 
         if (progressSlider.value >= 1f)
         {
