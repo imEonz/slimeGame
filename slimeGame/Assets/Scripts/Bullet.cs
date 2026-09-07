@@ -30,7 +30,8 @@ public class Bullet : MonoBehaviour
         if (collision.tag != "Enemy") return;
         if (collision.tag != "Map") Destroy(gameObject);
 
-        collision.GetComponent<Enemy>().TakeDamage(damage);
+        Enemy enemy = collision.GetComponent<Enemy>();
+        if(enemy.enemyState == Enemy.State.Alive) enemy.TakeDamage(damage);
 
         Destroy(gameObject);
     }

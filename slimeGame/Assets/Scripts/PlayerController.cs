@@ -44,6 +44,15 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     PlayerHealthBar playerHealthBar;
+    [SerializeField]
+    private float consumeIframes = 0.5f;
+    private float consumeTimer;
+    private Enemy attachedEnemy;
+    [SerializeField] 
+    private ConsumeMinigame consumeMinigame;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+    private Color originalColor;
 
     void Awake()
     {
@@ -51,7 +60,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-        
+        originalColor = spriteRenderer.color;
     }
     public void OnMove(InputValue playerInput)
     {
@@ -61,12 +70,21 @@ public class PlayerController : MonoBehaviour
     private void OnDash(InputValue playerInput)
     {
         dashInput = playerInput.Get<float>();
+
+        if (playerState == State.Consuming && dashInput > 0f)
+        {
+            consumeMinigame.RegisterDashPress();
+        }
     }
 
     private void FixedUpdate()
     {
-        
-
+        if (playerState == State.Consuming)
+        {
+            HandleConsuming();
+            return;
+        }
+        consumeTimer += Time.deltaTime;
         HandleMovement();
         HandleAnimation();
     }
@@ -95,6 +113,11 @@ public class PlayerController : MonoBehaviour
 
             isDashing = true;
             dashTimer += Time.deltaTime;
+
+            Color c = spriteRenderer.color;
+            c.r = Mathf.Lerp(c.r, 0f, 7f * Time.deltaTime);
+            spriteRenderer.color = c;
+
             curSpeed = math.lerp(curSpeed, dashSpeed, 7f * Time.deltaTime);
 
             rb.MovePosition(rb.position + dashDirection * curSpeed * Time.deltaTime);
@@ -119,6 +142,10 @@ public class PlayerController : MonoBehaviour
             }
             playerState = State.Moving;
             curSpeed = math.lerp(curSpeed, moveSpeed, 7f * Time.deltaTime);
+
+            Color c = spriteRenderer.color;
+            c.r = Mathf.Lerp(c.r, originalColor.r, 7f * Time.deltaTime);
+            spriteRenderer.color = c;
         }
 
 
@@ -182,16 +209,52 @@ public class PlayerController : MonoBehaviour
         if(collision.tag != "Enemy") return;
         Enemy enemy = collision.GetComponent<Enemy>();
 
-        if(enemy.enemyState == Enemy.State.Alive)
+        if(enemy.enemyState == Enemy.State.Alive && playerState == State.Moving || playerState == State.Still)
         {
+            if(consumeTimer < consumeIframes) return;
             TakeDamage(enemy.damage);;
         }
         else if (enemy.enemyState == Enemy.State.Stagger && playerState == State.Dashing)
         {
             playerState = State.Consuming;
             enemy.enemyState = Enemy.State.Consumed;
+            attachedEnemy = enemy;
+
+            transform.position = enemy.transform.position;
+            consumeMinigame.StartConsuming(attachedEnemy, OnConsumeComplete);
         }
 
+    }
+
+    private void HandleConsuming()
+    {
+        if(attachedEnemy == null)
+        {
+            playerState = State.Still;
+            return;
+        }
+
+        rb.MovePosition(attachedEnemy.transform.position);
+    }
+
+    private void OnConsumeComplete(bool won)
+    {
+        if (won)
+        {
+            ConsumeReward();
+        }
+        attachedEnemy.enemyState = Enemy.State.Dead;
+        
+        attachedEnemy = null;
+        isDashing = false;
+        dashTimer = 0f;
+        playerState = State.Still;
+        consumeTimer = 0;
+    }
+
+    private void ConsumeReward()
+    {
+        Debug.Log("Imaginary rewards");
     }
 
     public float GetPlayerHP()

@@ -26,12 +26,20 @@ public class Enemy : MonoBehaviour
     public enum State {Alive, Dead, Stagger, Consumed}
     public State enemyState;
 
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private float flashSpeed = 10f;
+    private Color originalColor;
+
     void Start()
     {
         enemyState = State.Alive;
         curHP = maxHP;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         transform.position = new Vector2(Random.Range(-xRange,xRange), Random.Range(-yRange,yRange));
+
+        originalColor = spriteRenderer.color;
     }
 
     public void MyFixedUpdate()
@@ -60,6 +68,7 @@ public class Enemy : MonoBehaviour
         curHP -= damage;
         if(curHP <= 0)
         {
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
             if(staggerChance > Random.Range(0f,1f)) enemyState = State.Stagger;
             else enemyState = State.Dead;
         }
@@ -68,8 +77,18 @@ public class Enemy : MonoBehaviour
 
     private void Stagger()
     {
-        
         staggerTimer += Time.deltaTime;
+
+        float t = Mathf.PingPong(staggerTimer * flashSpeed, 1f);
+        spriteRenderer.color = Color.Lerp(originalColor, Color.white, t);
+
         if(staggerTimer > staggerTime) enemyState = State.Dead;
+    }
+
+    public void SetOpacity(float opacity)
+    {
+        Color c = spriteRenderer.color;
+        c.a = opacity;
+        spriteRenderer.color = c;
     }
 }

@@ -472,10 +472,12 @@ MonoBehaviour:
   player: {fileID: 0}
   rb: {fileID: -8954539984011150311}
   em: {fileID: 0}
-  staggerChance: 0.214
+  staggerChance: 0.348
   staggerTime: 2.5
   enemyHealthBar: {fileID: 3921488245795405269}
   enemyState: 0
+  spriteRenderer: {fileID: 4651680904155869882}
+  flashSpeed: 10
 --- !u!50 &-8954539984011150311
 Rigidbody2D:
   serializedVersion: 4
