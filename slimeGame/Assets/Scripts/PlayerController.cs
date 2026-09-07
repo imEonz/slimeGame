@@ -8,6 +8,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
+    [SerializeField]
+    private float maxHP;
+    [SerializeField]
+    private float curHP;
 
     [SerializeField]
     private Rigidbody2D rb;
@@ -34,8 +38,21 @@ public class PlayerController : MonoBehaviour
     private bool isCooldown;
 
     private enum Direction { None, Up, Down, Left, Right }
+    private enum State { Still, Moving, Dashing, Consuming}
+    [SerializeField]
+    private State playerState;
 
+    [SerializeField]
+    PlayerHealthBar playerHealthBar;
 
+    void Awake()
+    {
+        curHP = maxHP;
+    }
+    void Start()
+    {
+        
+    }
     public void OnMove(InputValue playerInput)
     {
         moveInput = playerInput.Get<Vector2>();
@@ -61,6 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!isDashing)
             {
+                playerState = State.Dashing;
                 dashDirection = moveInput.normalized;
                 Direction dashDir = GetDirection(moveInput);
                 string dashClip = null;
@@ -99,8 +117,12 @@ public class PlayerController : MonoBehaviour
                     
                 }
             }
+            playerState = State.Moving;
             curSpeed = math.lerp(curSpeed, moveSpeed, 7f * Time.deltaTime);
         }
+
+
+        if(moveInput == Vector2.zero) playerState = State.Still;
         rb.MovePosition(rb.position + moveInput * curSpeed * Time.deltaTime);
     }
 
@@ -142,5 +164,42 @@ public class PlayerController : MonoBehaviour
             return input.x > 0 ? Direction.Right : Direction.Left;
         else
             return input.y > 0 ? Direction.Up : Direction.Down;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        curHP -= damage;
+        if(curHP <= 0)
+        {
+            curHP = 0;
+            Debug.LogWarning("You died");
+        }
+        playerHealthBar.UpdatePlayerHPBar();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag != "Enemy") return;
+        Enemy enemy = collision.GetComponent<Enemy>();
+
+        if(enemy.enemyState == Enemy.State.Alive)
+        {
+            TakeDamage(enemy.damage);;
+        }
+        else if (enemy.enemyState == Enemy.State.Stagger && playerState == State.Dashing)
+        {
+            playerState = State.Consuming;
+            enemy.enemyState = Enemy.State.Consumed;
+        }
+
+    }
+
+    public float GetPlayerHP()
+    {
+        return curHP;
+    }
+    public float GetPlayerMaxHP()
+    {
+        return maxHP;
     }
 }

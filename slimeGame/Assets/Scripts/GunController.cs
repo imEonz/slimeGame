@@ -37,6 +37,8 @@ public class GunController : MonoBehaviour
 
         foreach (var enemy in enemiesInRange)
         {
+            if(enemy.GetComponent<Enemy>().enemyState != Enemy.State.Alive) continue;
+            
             float distance = Vector2.Distance(transform.position, enemy.gameObject.transform.position);
             if(distance < closestDistance)
             {
