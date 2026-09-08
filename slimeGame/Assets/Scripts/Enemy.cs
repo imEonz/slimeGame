@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
     private float flashSpeed = 10f;
     private Color originalColor;
 
+    public List<EnemyLoot> lootTable = new List<EnemyLoot>();
+
     void Start()
     {
         enemyState = State.Alive;

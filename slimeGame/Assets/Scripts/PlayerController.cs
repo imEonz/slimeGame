@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!isDashing)
             {
+                spriteRenderer.sortingOrder = 5;
                 playerState = State.Dashing;
                 dashDirection = moveInput.normalized;
                 Direction dashDir = GetDirection(moveInput);
@@ -146,6 +147,7 @@ public class PlayerController : MonoBehaviour
             Color c = spriteRenderer.color;
             c.r = Mathf.Lerp(c.r, originalColor.r, 7f * Time.deltaTime);
             spriteRenderer.color = c;
+            spriteRenderer.sortingOrder = 3;
         }
 
 
@@ -234,6 +236,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        spriteRenderer.sortingOrder = 5;
         rb.MovePosition(attachedEnemy.transform.position);
     }
 
@@ -241,7 +244,7 @@ public class PlayerController : MonoBehaviour
     {
         if (won)
         {
-            ConsumeReward();
+            ConsumeReward(attachedEnemy);
         }
         attachedEnemy.enemyState = Enemy.State.Dead;
         
@@ -252,9 +255,20 @@ public class PlayerController : MonoBehaviour
         consumeTimer = 0;
     }
 
-    private void ConsumeReward()
+    private void ConsumeReward(Enemy consumedEnemy)
     {
         Debug.Log("Imaginary rewards");
+
+        foreach (var item in consumedEnemy.lootTable)
+        {
+            if(UnityEngine.Random.Range(0f,1f) < item.dropRate)
+            {
+                if(item.reward is HealReward healReward)
+                {
+                    healReward.Apply(this, healReward.curLevel);
+                }
+            }
+        }
     }
 
     public float GetPlayerHP()
@@ -264,5 +278,13 @@ public class PlayerController : MonoBehaviour
     public float GetPlayerMaxHP()
     {
         return maxHP;
+    }
+    public void HealDamage(float percentage)
+    {
+        float healAmount = maxHP * percentage;
+
+        curHP += healAmount;
+        if (curHP > maxHP) curHP = maxHP;
+        playerHealthBar.UpdatePlayerHPBar();
     }
 }
