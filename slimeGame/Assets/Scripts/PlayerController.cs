@@ -287,4 +287,32 @@ public class PlayerController : MonoBehaviour
         if (curHP > maxHP) curHP = maxHP;
         playerHealthBar.UpdatePlayerHPBar();
     }
+
+    public void ApplyStatBuff(StatType statType, int level)
+    {
+        switch (statType)
+        {
+            case StatType.MaxHP:
+                maxHP = maxHP * ((level * 0.5f) +1);
+                curHP = curHP * ((level * 0.5f) +1);
+                playerHealthBar.UpdatePlayerHPBar();
+                break;
+            case StatType.DMG:
+
+                break;
+            case StatType.Speed:
+                moveSpeed = moveSpeed + (level * 3);
+                dashSpeed =  dashSpeed + (level * 3);
+                break;
+            case StatType.Dash:
+
+                break;
+            case StatType.DashCooldown:
+
+                break;
+            case StatType.Firerate:
+
+                break;
+        }
+    }
 }

@@ -472,7 +472,7 @@ MonoBehaviour:
   player: {fileID: 0}
   rb: {fileID: -8954539984011150311}
   em: {fileID: 0}
-  staggerChance: 0.717
+  staggerChance: 0.202
   staggerTime: 2.5
   enemyHealthBar: {fileID: 3921488245795405269}
   enemyState: 0

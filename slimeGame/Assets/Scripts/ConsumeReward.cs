@@ -8,6 +8,7 @@ public abstract class ConsumeReward : ScriptableObject
     [SerializeField] private Sprite icon;
     [SerializeField] private int maxLevel = 5;
     [SerializeField] public int curLevel;
+    public int experience = 1;
 
     public string RewardName => rewardName;
     public Sprite Icon => icon;
