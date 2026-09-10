@@ -11,26 +11,6 @@ public class StatBuffReward : ConsumeReward
     private StatType statType;
     public override void Apply(PlayerController player, int level)
     {
-        switch (statType)
-        {
-            case StatType.MaxHP:
-            
-                break;
-            case StatType.DMG:
-
-                break;
-            case StatType.Speed:
-
-                break;
-            case StatType.Dash:
-
-                break;
-            case StatType.DashCooldown:
-
-                break;
-            case StatType.Firerate:
-
-                break;
-        }
+        player.ApplyStatBuff(statType, level);
     }
 }

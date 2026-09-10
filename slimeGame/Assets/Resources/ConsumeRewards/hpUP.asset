@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c7853971541364da6e794646df9763, type: 3}
   m_Name: hpUP
   m_EditorClassIdentifier: 
-  rewardName: 
+  rewardName: HP
   icon: {fileID: 0}
   maxLevel: 5
-  curLevel: 0
+  curLevel: 1
   experience: 1
   statType: 0

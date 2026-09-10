@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
 
+    [SerializeField]
+    SkillManager skillManager;
+
     void Awake()
     {
         curHP = maxHP;
@@ -267,6 +270,10 @@ public class PlayerController : MonoBehaviour
                 {
                     healReward.Apply(this, healReward.curLevel);
                 }
+                if(item.reward is StatBuffReward statBuffReward)
+                {
+                    skillManager.InstantiateStatBuff(this, statBuffReward);
+                }
             }
         }
     }
@@ -293,25 +300,24 @@ public class PlayerController : MonoBehaviour
         switch (statType)
         {
             case StatType.MaxHP:
-                maxHP = maxHP * ((level * 0.5f) +1);
-                curHP = curHP * ((level * 0.5f) +1);
+                maxHP = maxHP * ((level * 0.1f) +1);
+                curHP = curHP * ((level * 0.1f) +1);
                 playerHealthBar.UpdatePlayerHPBar();
                 break;
             case StatType.DMG:
-
+                // I need this to communicate with the weapon manager which i havent added
                 break;
             case StatType.Speed:
-                moveSpeed = moveSpeed + (level * 3);
-                dashSpeed =  dashSpeed + (level * 3);
+                moveSpeed = moveSpeed + (level * 1.2f);
                 break;
             case StatType.Dash:
-
+                dashSpeed =  dashSpeed + (level * 3.5f);
                 break;
             case StatType.DashCooldown:
-
+            dashCooldown = dashCooldown/(2 + (5 - level));
                 break;
             case StatType.Firerate:
-
+                // I need this to communicate with the weapon manager which i havent added
                 break;
         }
     }
