@@ -472,7 +472,7 @@ MonoBehaviour:
   player: {fileID: 0}
   rb: {fileID: -8954539984011150311}
   em: {fileID: 0}
-  staggerChance: 0.924
+  staggerChance: 0.524
   staggerTime: 2.5
   enemyHealthBar: {fileID: 3921488245795405269}
   enemyState: 0
@@ -482,8 +482,10 @@ MonoBehaviour:
   - reward: {fileID: 11400000, guid: 2fd093a278309284d8af72a854a48127, type: 2}
     dropRate: 1
   - reward: {fileID: 11400000, guid: 8584497ee147f494a997b450e6a38442, type: 2}
-    dropRate: 1
+    dropRate: 0.295
   - reward: {fileID: 11400000, guid: ef92ad93bb664f3499c57d3cbabaa8c6, type: 2}
+    dropRate: 0.165
+  - reward: {fileID: 11400000, guid: c836004e19826c047bcda8728944d5f8, type: 2}
     dropRate: 1
 --- !u!50 &-8954539984011150311
 Rigidbody2D:

@@ -18,11 +18,17 @@ public class GunController : MonoBehaviour
     [SerializeField]
     private LayerMask layer;
 
+    void Start()
+    {
+        if(player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     void Update()
     {
         cooldownTimer += Time.deltaTime;
         if(cooldownTimer > bulletCooldown)
         {
+            if(!GetClosestEnemyInRange()) return;
             cooldownTimer = 0f;
             Shot();
         }
@@ -52,11 +58,13 @@ public class GunController : MonoBehaviour
 
     public void Shot()
     {
+        if(!GetClosestEnemyInRange()) return;
+        TeleportAroundPlayer();
+        
         Transform target = GetClosestEnemyInRange();
         if(target == null) return;
-
-        TeleportAroundPlayer();
-
+        
+        
         GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         Bullet bullet = proj.GetComponent<Bullet>();
         bullet.target = target;

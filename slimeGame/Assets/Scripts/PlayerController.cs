@@ -56,6 +56,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     SkillManager skillManager;
+    [SerializeField]
+    WeaponManager weaponManager;
 
     void Awake()
     {
@@ -260,7 +262,6 @@ public class PlayerController : MonoBehaviour
 
     private void ConsumeReward(Enemy consumedEnemy)
     {
-        Debug.Log("Imaginary rewards");
 
         foreach (var item in consumedEnemy.lootTable)
         {
@@ -270,9 +271,13 @@ public class PlayerController : MonoBehaviour
                 {
                     healReward.Apply(this, healReward.curLevel);
                 }
-                if(item.reward is StatBuffReward statBuffReward)
+                else if(item.reward is StatBuffReward statBuffReward)
                 {
                     skillManager.InstantiateStatBuff(this, statBuffReward);
+                }
+                else if(item.reward is WeaponReward weaponReward)
+                {
+                    weaponManager.PickupWeapon(weaponReward);
                 }
             }
         }

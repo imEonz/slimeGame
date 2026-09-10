@@ -10,11 +10,10 @@ public class NotificationManager : MonoBehaviour
     GameObject notifPrefab;
     [SerializeField]
     float delay;
-    float delayTimer;
 
-    private readonly Queue<RewardInstance> notifQueue = new Queue<RewardInstance>();
+    private readonly Queue<ActiveReward> notifQueue = new Queue<ActiveReward>();
     private Coroutine processCoroutine;
-    public void ShowPickup(RewardInstance item)
+    public void ShowPickup(ActiveReward item)
     {
         notifQueue.Enqueue(item);
 
@@ -25,7 +24,7 @@ public class NotificationManager : MonoBehaviour
     {
         while (notifQueue.Count > 0)
         {
-            RewardInstance item = notifQueue.Dequeue();
+            ActiveReward item = notifQueue.Dequeue();
 
             GameObject notif = Instantiate(notifPrefab, notifHolder);
             notif.GetComponent<PickUpObject>().InitializeNotif(item);

@@ -13,7 +13,7 @@ public class SkillManager : MonoBehaviour
 
     public void InstantiateStatBuff(PlayerController player, StatBuffReward statBuff)
     {
-        RewardInstance existing = activeRewards.Find(r => r.reward == statBuff);
+        RewardInstance existing = activeRewards.Find(r => r.data == statBuff);
 
         if (existing != null)
         {
@@ -35,18 +35,5 @@ public class SkillManager : MonoBehaviour
             notificationManager.ShowPickup(newInstance);
         }
 
-    }
-}
-
-[System.Serializable]
-public class RewardInstance
-{
-    public ConsumeReward reward;
-    public int curLevel = 1;
-    public int experience = 0;
-
-    public RewardInstance(ConsumeReward reward)
-    {
-        this.reward = reward;
     }
 }

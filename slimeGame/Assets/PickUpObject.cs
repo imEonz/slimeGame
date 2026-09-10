@@ -11,14 +11,14 @@ public class PickUpObject : MonoBehaviour
     [SerializeField] 
     private float displayDuration;
     [SerializeField]
-    TMP_Text name;
+    TMP_Text objName;
     [SerializeField]
     TMP_Text level;
     [SerializeField]
     Slider expSlider;
-    public void InitializeNotif(RewardInstance item)
+    public void InitializeNotif(ActiveReward item)
     {
-        name.text = item.reward.RewardName;
+        objName.text = item.data.RewardName;
         level.text = "Lv: "+item.curLevel.ToString();
         expSlider.maxValue = item.curLevel+1f;
         expSlider.value = item.experience;
