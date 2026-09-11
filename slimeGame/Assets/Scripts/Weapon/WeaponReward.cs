@@ -11,6 +11,8 @@ public class WeaponReward : ConsumeReward
     [SerializeField] private List<OnLevelUp> onLevelUps;
     public GameObject WeaponPrefab => weaponPrefab;
     public List<OnLevelUp> OnLevelUps => onLevelUps;
+    public float BaseDamage => baseDamage;
+    public float BaseFireRate => baseFireRate;
 
     public override void Apply(PlayerController player, int level)
     {

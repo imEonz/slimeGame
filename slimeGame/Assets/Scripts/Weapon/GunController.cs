@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
-public class GunController : MonoBehaviour
+public class GunController : MonoBehaviour, IWeaponController
 {
     [SerializeField]
     private Transform player;
     private float orbitRadius = 1.3f;
     [SerializeField]
     private GameObject projectilePrefab;
+    [SerializeField]
+    private float damage;
     [SerializeField]
     private float range;
     [SerializeField]
@@ -68,6 +70,7 @@ public class GunController : MonoBehaviour
         GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         Bullet bullet = proj.GetComponent<Bullet>();
         bullet.target = target;
+        bullet.damage = this.damage;
     }
 
     public void TeleportAroundPlayer()
@@ -77,5 +80,14 @@ public class GunController : MonoBehaviour
         Vector2 offset = new Vector2(Mathf.Cos(randomAngle), Mathf.Sin(randomAngle)) * orbitRadius;
 
         transform.position = (Vector2)player.position + offset;
+    }
+
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
+    }
+    public void SetFireRate(float firerate)
+    {
+        this.bulletCooldown = firerate;
     }
 }

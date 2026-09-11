@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+
 public abstract class ActiveReward
 {
     public ConsumeReward data;
@@ -8,7 +10,7 @@ public abstract class ActiveReward
 [System.Serializable]
 public class ActiveWeapon : ActiveReward
 {
-    public GunController controller;
+    public List<GunController> controllers;
 }
 
 [System.Serializable]
