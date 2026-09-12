@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float maxHP;
-    public float curHP;
-    public float damage;
+    private string enemyName;
+    private float maxHP;
+    private float curHP;
+    private float damage;
+    private int level;
     public Transform player;
     public Rigidbody2D rb;
     private float speed = 5f;
@@ -31,27 +33,24 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float flashSpeed = 10f;
     private Color originalColor;
+    private EnemyBehaviour enemyBehaviour;
 
-    public List<EnemyLoot> lootTable = new List<EnemyLoot>();
+    private List<EnemyLoot> lootTable = new List<EnemyLoot>();
 
     void Start()
     {
         enemyState = State.Alive;
-        curHP = maxHP;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         transform.position = new Vector2(Random.Range(-xRange,xRange), Random.Range(-yRange,yRange));
 
         originalColor = spriteRenderer.color;
+        
     }
 
     public void MyFixedUpdate()
     {
         if(enemyState == State.Alive)
         {
-            Vector2 dir = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y);
-            dir = dir.normalized;
-            Vector2 nextPos = (Vector2)transform.position + dir * speed * Time.deltaTime;
-            rb.MovePosition(nextPos);
+            enemyBehaviour.Tick(Time.deltaTime);
         }
         else if (enemyState == State.Stagger)
         {
@@ -77,6 +76,28 @@ public class Enemy : MonoBehaviour
         enemyHealthBar.UpdateSlider();
     }
 
+    public void Iniitialize(EnemyData enemyData)
+    {
+        enemyName = enemyData.EnemyName;
+        maxHP = enemyData.MaxHP;
+        curHP = enemyData.MaxHP;
+        damage = enemyData.Damage;
+        speed = enemyData.Speed;
+        staggerChance = enemyData.StaggerChance;
+        staggerTime = enemyData.StaggerTime;
+        level = enemyData.Level;
+        lootTable = enemyData.LootTable;
+        spriteRenderer.sprite = enemyData.EnemySprite;
+
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        var template = enemyData.EnemyBehaviour;
+        EnemyBehaviour instance = (EnemyBehaviour)gameObject.AddComponent(template.GetType());
+        JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(template), instance);
+        instance.Initialize(this);
+        enemyBehaviour = instance;
+    }
+
     private void Stagger()
     {
         staggerTimer += Time.deltaTime;
@@ -92,5 +113,22 @@ public class Enemy : MonoBehaviour
         Color c = spriteRenderer.color;
         c.a = opacity;
         spriteRenderer.color = c;
+    }
+
+    public List<EnemyLoot> GetEnemyLoot()
+    {
+        return lootTable;
+    }
+    public float GetMaxHP()
+    {
+        return maxHP;
+    }
+    public float GetCurHP()
+    {
+        return curHP;
+    }
+    public float GetDamage()
+    {
+        return damage;
     }
 }

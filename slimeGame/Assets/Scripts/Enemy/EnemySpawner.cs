@@ -17,6 +17,9 @@ public class EnemySpawner : MonoBehaviour
     private Transform enemiesFolder;
     [SerializeField]
     private bool isOn;
+
+    [SerializeField]
+    private List<EnemyData> spawnableEnemies;
     
 
     void Update()
@@ -42,6 +45,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, enemiesFolder, true);
             Enemy enemyScript = enemy.GetComponent<Enemy>();
             enemyScript.em = em;
+            enemyScript.Iniitialize(spawnableEnemies[Random.Range(0,spawnableEnemies.Count)]);
             em.enemies.Add(enemyScript);
         }
     }

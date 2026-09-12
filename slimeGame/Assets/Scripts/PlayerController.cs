@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
         if(enemy.enemyState == Enemy.State.Alive && playerState == State.Moving || playerState == State.Still)
         {
             if(consumeTimer < consumeIframes) return;
-            TakeDamage(enemy.damage);;
+            TakeDamage(enemy.GetDamage());
         }
         else if (enemy.enemyState == Enemy.State.Stagger && playerState == State.Dashing)
         {
@@ -270,7 +270,7 @@ public class PlayerController : MonoBehaviour
     private void ConsumeReward(Enemy consumedEnemy)
     {
 
-        foreach (var item in consumedEnemy.lootTable)
+        foreach (var item in consumedEnemy.GetEnemyLoot())
         {
             if(UnityEngine.Random.Range(0f,1f) < item.dropRate)
             {
