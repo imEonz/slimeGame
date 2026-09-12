@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5524473217862144171}
   - component: {fileID: 5019658381763144542}
-  - component: {fileID: 4228059104844806972}
+  - component: {fileID: -4677233167478186829}
   - component: {fileID: 6042289101652060665}
   m_Layer: 0
   m_Name: bullet
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4228059104844806972
+--- !u!114 &-4677233167478186829
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,12 +95,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4375833417746700288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eb76e4b5c3ac9e449bf4a3d02af82c7, type: 3}
+  m_Script: {fileID: 11500000, guid: adc08e61a303cbf418c052b06ecc5b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
   speed: 20
   target: {fileID: 0}
+  pierceCount: 0
 --- !u!58 &6042289101652060665
 CircleCollider2D:
   m_ObjectHideFlags: 0

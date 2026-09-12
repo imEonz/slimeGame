@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class WeaponLevelReward
 {
-    public enum RewardType { Damage, FireRate, AddInstance, SpriteChange, Homing, Explode, Pierce, Spin, Clone }
+    public enum RewardType { Damage, FireRate, AddInstance, SpriteChange, Homing, Range, Pierce, Count, Clone }
     public RewardType type;
     public float value;
     public Sprite sprite;

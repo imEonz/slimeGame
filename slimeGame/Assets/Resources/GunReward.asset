@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf8eb8a79841f9f4998178ed0d8339a4, type: 3}
+  m_Name: GunReward
+  m_EditorClassIdentifier: 
+  rewardName: Gun
+  icon: {fileID: 0}
+  maxLevel: 5
+  curLevel: 1
+  weaponPrefab: {fileID: 1542910341248240082, guid: 5e94c9d225a7d604aa6225a7aa42ea6d, type: 3}
+  baseDamage: 20
+  baseFireRate: 1
+  onLevelUps:
+  - level: 2
+    rewards:
+    - type: 0
+      value: 25
+      sprite: {fileID: 0}
+    - type: 1
+      value: 0.5
+      sprite: {fileID: 0}
+  - level: 3
+    rewards:
+    - type: 2
+      value: 1
+      sprite: {fileID: 0}
+    - type: 0
+      value: 30
+      sprite: {fileID: 0}
+  - level: 4
+    rewards:
+    - type: 1
+      value: 0.35
+      sprite: {fileID: 0}
+    - type: 0
+      value: 35
+      sprite: {fileID: 0}
+    - type: 6
+      value: 2
+      sprite: {fileID: 0}
+  - level: 5
+    rewards:
+    - type: 2
+      value: 2
+      sprite: {fileID: 0}
+    - type: 0
+      value: 40
+      sprite: {fileID: 0}
+    - type: 7
+      value: 2
+      sprite: {fileID: 0}

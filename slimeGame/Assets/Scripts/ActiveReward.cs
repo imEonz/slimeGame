@@ -10,7 +10,7 @@ public abstract class ActiveReward
 [System.Serializable]
 public class ActiveWeapon : ActiveReward
 {
-    public List<GunController> controllers;
+    public List<WeaponController> controllers;
 }
 
 [System.Serializable]

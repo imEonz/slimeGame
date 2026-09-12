@@ -59,6 +59,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     WeaponManager weaponManager;
 
+    public bool AutoAim = true;
+
     void Awake()
     {
         curHP = maxHP;
@@ -80,6 +82,11 @@ public class PlayerController : MonoBehaviour
         {
             consumeMinigame.RegisterDashPress();
         }
+    }
+    private void OnMode(InputValue playerInput)
+    {
+        if(AutoAim) AutoAim = false;
+        else AutoAim = true;
     }
 
     private void FixedUpdate()

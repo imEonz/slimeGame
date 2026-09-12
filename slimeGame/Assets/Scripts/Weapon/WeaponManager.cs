@@ -84,9 +84,19 @@ public class WeaponManager : MonoBehaviour
                         CreateWeapon(weaponData);
                     }
                     break;
-
                 case WeaponLevelReward.RewardType.SpriteChange:
-                    
+                
+                    break;
+                case WeaponLevelReward.RewardType.Pierce:
+                    foreach(var item in weapon.controllers) item.SetPierce((int)reward.value);
+                    break;
+
+                case WeaponLevelReward.RewardType.Count:
+                    foreach(var item in weapon.controllers) item.SetShootCount((int)reward.value);
+                    break;
+
+                case WeaponLevelReward.RewardType.Range:
+                    foreach(var item in weapon.controllers) item.SetRange(reward.value);
                     break;
             }
         }
@@ -108,7 +118,7 @@ public class WeaponManager : MonoBehaviour
     {
         ActiveWeapon existing = activeWeapons.Find(w => w.data == weaponData);
         GameObject go = Instantiate(weaponData.WeaponPrefab, weaponHolder);
-        GunController newController = go.GetComponent<GunController>();
+        WeaponController newController = go.GetComponent<WeaponController>();
 
         if(existing != null)
         {
@@ -122,7 +132,7 @@ public class WeaponManager : MonoBehaviour
             ActiveWeapon newWeapon = new ActiveWeapon
             {
                 data = weaponData,
-                controllers = new List<GunController>()
+                controllers = new List<WeaponController>()
             };
             newWeapon.controllers.Add(newController);
             activeWeapons.Add(newWeapon);        
@@ -133,7 +143,7 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    private void SyncWeaponToCurLevel(ActiveWeapon activeWeapon, GunController controller)
+    private void SyncWeaponToCurLevel(ActiveWeapon activeWeapon, WeaponController controller)
     {
         WeaponReward weaponData = (WeaponReward)activeWeapon.data;
         if (weaponData == null) return;
@@ -151,6 +161,15 @@ public class WeaponManager : MonoBehaviour
                         break;
                     case WeaponLevelReward.RewardType.FireRate:
                         controller.SetFireRate(reward.value);
+                        break;
+                    case WeaponLevelReward.RewardType.Pierce:
+                        controller.SetPierce((int)reward.value);
+                        break;
+                    case WeaponLevelReward.RewardType.Count:
+                        controller.SetShootCount((int)reward.value);
+                        break;
+                    case WeaponLevelReward.RewardType.Range:
+                        controller.SetRange(reward.value);
                         break;
                 }
             }

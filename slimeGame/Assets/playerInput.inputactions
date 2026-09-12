@@ -28,7 +28,7 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "e26351a1-93dd-4bda-a903-23be71d7d82f",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -41,6 +41,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Mode",
+                    "type": "Button",
+                    "id": "a5e9255e-14af-47cc-8aa6-31391e373836",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -283,6 +292,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a274b401-f7e7-4153-9424-099b79d7ab93",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Mode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

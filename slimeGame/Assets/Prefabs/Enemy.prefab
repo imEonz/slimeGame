@@ -487,6 +487,8 @@ MonoBehaviour:
     dropRate: 0.165
   - reward: {fileID: 11400000, guid: c836004e19826c047bcda8728944d5f8, type: 2}
     dropRate: 1
+  - reward: {fileID: 11400000, guid: c906db6987312ad458399447afa9f0cd, type: 2}
+    dropRate: 0.209
 --- !u!50 &-8954539984011150311
 Rigidbody2D:
   serializedVersion: 4
