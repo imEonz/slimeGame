@@ -81,7 +81,7 @@ public abstract class WeaponController : MonoBehaviour, IWeaponController
     {
         GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         Projectile projectile = proj.GetComponent<Projectile>();
-        projectile.Init(dir, damage, pierceCount);
+        projectile.Init(dir, damage, pierceCount, "Enemy");
         yield break;
     }
 

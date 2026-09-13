@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
     public int pierceCount;
     private Vector2 direction;
     private readonly HashSet<Collider2D> hitTargets = new HashSet<Collider2D>();
+    private string layer;
 
     private float deathTimer = 2f;
 
@@ -18,12 +19,13 @@ public class Projectile : MonoBehaviour
         MoveTowardsTarget();
     }
 
-    public void Init(Vector2 dir, float dmg, int pierce)
+    public void Init(Vector2 dir, float dmg, int pierce, string layer)
     {
         direction = dir;
         damage = dmg;
         pierceCount = pierce;
         transform.right = dir;
+        this.layer = layer;
         Destroy(gameObject, deathTimer);
     }
     private void MoveTowardsTarget()
@@ -33,7 +35,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Enemy") return;
+        if (collision.tag != layer) return;
         if (collision.tag == "Map") Destroy(gameObject);
         if (hitTargets.Contains(collision)) return;
 

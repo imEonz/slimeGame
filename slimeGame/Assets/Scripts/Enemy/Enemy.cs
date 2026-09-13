@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -34,8 +35,12 @@ public class Enemy : MonoBehaviour
     private float flashSpeed = 10f;
     private Color originalColor;
     private EnemyBehaviour enemyBehaviour;
-
+    private List<EnemySkill> enemySkills = new List<EnemySkill>();
+    private float timeBetweenCasts;
+    private float castTimer;
+    private int skillIndex;
     private List<EnemyLoot> lootTable = new List<EnemyLoot>();
+    private bool isCasting;
 
     void Start()
     {
@@ -50,7 +55,8 @@ public class Enemy : MonoBehaviour
     {
         if(enemyState == State.Alive)
         {
-            enemyBehaviour.Tick(Time.deltaTime);
+            bool blockMovement = TickSkills(Time.deltaTime);
+            if(!blockMovement) enemyBehaviour.Tick(Time.deltaTime);
         }
         else if (enemyState == State.Stagger)
         {
@@ -64,6 +70,36 @@ public class Enemy : MonoBehaviour
 
     }
 
+    private bool TickSkills(float deltatime)
+    {
+        if (enemySkills.Count == 0) return false;
+
+        
+        if(isCasting)
+        {
+            EnemySkill active = enemySkills[skillIndex];
+            bool stillcasting = enemySkills[skillIndex].Tick(deltatime);
+            if(!stillcasting)
+            {
+                isCasting = false;
+                skillIndex = (skillIndex + 1) % enemySkills.Count;
+                castTimer = 0f;
+            }
+            return active.BlocksMovement;
+        }
+
+        castTimer += deltatime;
+        if(castTimer >= timeBetweenCasts)
+        {
+            isCasting = true;
+            EnemySkill next = enemySkills[skillIndex];
+            next.Begin();
+            return next.BlocksMovement;
+        }
+
+        return false;
+    }
+
     public void TakeDamage(float damage)
     {
         curHP -= damage;
@@ -73,6 +109,11 @@ public class Enemy : MonoBehaviour
             if(staggerChance > Random.Range(0f,1f)) enemyState = State.Stagger;
             else enemyState = State.Dead;
         }
+        enemyHealthBar.UpdateSlider();
+    }
+    public void Heal(float healing)
+    {
+        curHP = Mathf.Min(curHP + healing, maxHP);
         enemyHealthBar.UpdateSlider();
     }
 
@@ -88,6 +129,7 @@ public class Enemy : MonoBehaviour
         level = enemyData.Level;
         lootTable = enemyData.LootTable;
         spriteRenderer.sprite = enemyData.EnemySprite;
+        timeBetweenCasts = enemyData.TimeBetweenCasts;
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -96,6 +138,15 @@ public class Enemy : MonoBehaviour
         JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(template), instance);
         instance.Initialize(this);
         enemyBehaviour = instance;
+
+        foreach (var item in enemyData.EnemySkills)
+        {
+            if (item == null) continue;
+            EnemySkill enemySkill = (EnemySkill)gameObject.AddComponent(item.GetType());
+            JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(item), enemySkill);
+            enemySkill.Initialize(this);
+            this.enemySkills.Add(enemySkill);
+        }
     }
 
     private void Stagger()

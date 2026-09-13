@@ -2908,7 +2908,7 @@ MonoBehaviour:
   player: {fileID: 1922221164}
   notificationManager: {fileID: 919521520}
   activeWeapons: []
-  starterWeapon: {fileID: 11400000, guid: c906db6987312ad458399447afa9f0cd, type: 2}
+  starterWeapon: {fileID: 11400000, guid: c836004e19826c047bcda8728944d5f8, type: 2}
   weaponHolder: {fileID: 1225324825}
 --- !u!1 &1741804571
 GameObject:
@@ -3039,6 +3039,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 281edcad7abc6ef43b5461b6b26aceef, type: 2}
   - {fileID: 11400000, guid: 0c069c6f761825d499d7de49287477cf, type: 2}
   - {fileID: 11400000, guid: 139fb84439f5b19429aff603f99e0359, type: 2}
+  - {fileID: 11400000, guid: 9c85e6a268340d54cb1625b78fef21f9, type: 2}
 --- !u!1 &1771266175
 GameObject:
   m_ObjectHideFlags: 0

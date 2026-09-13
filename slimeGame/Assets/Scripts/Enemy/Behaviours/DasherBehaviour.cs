@@ -16,6 +16,9 @@ public class DasherBehaviour : EnemyBehaviour
     private float dashSpeed;
     [SerializeField]
     private float dashWindup;
+    [SerializeField]
+    private int dashAmount = 1;
+    private int timesDashed;
     private enum ChargeState { Approaching, WindUp, Dashing }
     private ChargeState state = ChargeState.Approaching;
     private float stateTimer;
@@ -51,7 +54,17 @@ public class DasherBehaviour : EnemyBehaviour
             break;
             case ChargeState.Dashing:
                 rb.MovePosition((Vector2)enemy.transform.position + dashDirection * dashSpeed * deltaTime);
-                if (stateTimer >= dashTime) { state = ChargeState.Approaching; stateTimer = 0f; }
+                if (stateTimer >= dashTime) 
+                { 
+                    stateTimer = 0f;
+                    timesDashed++;
+                    if(dashAmount >= timesDashed) { state = ChargeState.Approaching; timesDashed = 0;}
+                    else
+                    {
+                        Vector2 recaluclateDir = (Vector2)player.position - (Vector2)enemy.transform.position;
+                        dashDirection = recaluclateDir.normalized;
+                    }
+                }
 
             break;
         }

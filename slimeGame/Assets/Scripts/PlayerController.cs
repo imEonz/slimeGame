@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private bool isCooldown;
 
     private enum Direction { None, Up, Down, Left, Right }
-    private enum State { Still, Moving, Dashing, Consuming}
+    public enum State { Still, Moving, Dashing, Consuming}
     [SerializeField]
     private State playerState;
 
@@ -332,5 +332,10 @@ public class PlayerController : MonoBehaviour
                 // I need this to communicate with the weapon manager which i havent added
                 break;
         }
+    }
+
+    public State GetPlayerState()
+    {
+        return playerState;
     }
 }

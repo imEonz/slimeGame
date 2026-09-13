@@ -78,6 +78,6 @@ public class SwordController : WeaponController
     {
         GameObject proj = Instantiate(projectilePrefab, pivot.position, quaternion.identity);
         SlashProjectile sp = proj.GetComponent<SlashProjectile>();
-        sp.Init(direction, damage, pierceCount);
+        sp.Init(direction, damage, pierceCount, "Enemy");
     }
 }

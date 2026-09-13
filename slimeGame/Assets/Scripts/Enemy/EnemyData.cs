@@ -24,6 +24,10 @@ public class EnemyData : ScriptableObject
     private List<EnemyLoot> lootTable = new List<EnemyLoot>();
     [SerializeField]
     private EnemyBehaviour enemyBehaviour;
+    [SerializeField]
+    private List<EnemySkill> enemySkills = new List<EnemySkill>();
+    [SerializeField]
+    private float timeBetweenCasts;
 
 
     public string EnemyName => enemyName;
@@ -35,5 +39,7 @@ public class EnemyData : ScriptableObject
     public int Level => level;
     public List<EnemyLoot> LootTable => lootTable;
     public EnemyBehaviour EnemyBehaviour => enemyBehaviour;
+    public List<EnemySkill> EnemySkills => enemySkills;
+    public float TimeBetweenCasts => timeBetweenCasts;
     public Sprite EnemySprite => sprite;
 }
