@@ -25,3 +25,4 @@ MonoBehaviour:
     dropRate: 1
   - reward: {fileID: 11400000, guid: ef92ad93bb664f3499c57d3cbabaa8c6, type: 2}
     dropRate: 0.2
+  enemyBehaviour: {fileID: -7177543201847101687, guid: 83c7c4bb229a60945b86ca89315c9289, type: 3}
