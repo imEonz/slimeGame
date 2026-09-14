@@ -8,24 +8,27 @@ public class Projectile : MonoBehaviour
     public float speed = 20f;
     public Transform target;
     public int pierceCount;
-    private Vector2 direction;
+    public float range;
+    protected Vector2 direction;
     private readonly HashSet<Collider2D> hitTargets = new HashSet<Collider2D>();
     private string layer;
-
+    
+    [SerializeField]
     private float deathTimer = 2f;
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         MoveTowardsTarget();
     }
 
-    public void Init(Vector2 dir, float dmg, int pierce, string layer)
+    public void Init(Vector2 dir, float dmg, int pierce, string layer, Transform target = null)
     {
         direction = dir;
         damage = dmg;
         pierceCount = pierce;
         transform.right = dir;
         this.layer = layer;
+        if(target != null) this.target = target;
         Destroy(gameObject, deathTimer);
     }
     private void MoveTowardsTarget()
@@ -52,5 +55,33 @@ public class Projectile : MonoBehaviour
     protected virtual void OnHit(Enemy enemy)
     {
         enemy.TakeDamage(damage);
+    }
+
+    protected Vector2 RecalculateDirection(Transform enemy)
+    {
+        if(target == null) return direction;
+        return ((Vector2)enemy.position - (Vector2)transform.position).normalized;
+    }
+
+    protected Transform GetClosestEnemyInRange()
+    {
+        Transform closestEnemy = null;
+        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(this.transform.position, range, LayerMask.GetMask("Enemy"));
+
+        float closestDistance = Mathf.Infinity;
+
+        foreach (var enemy in enemiesInRange)
+        {
+            if(enemy.GetComponent<Enemy>().enemyState != Enemy.State.Alive) continue;
+            
+            float distance = Vector2.Distance(transform.position, enemy.gameObject.transform.position);
+            if(distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestEnemy = enemy.transform;
+            }
+        }
+
+        return closestEnemy;
     }
 }

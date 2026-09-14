@@ -23,7 +23,7 @@ MonoBehaviour:
   lootTable:
   - reward: {fileID: 11400000, guid: 2fd093a278309284d8af72a854a48127, type: 2}
     dropRate: 1
-  - reward: {fileID: 11400000, guid: c906db6987312ad458399447afa9f0cd, type: 2}
+  - reward: {fileID: 11400000, guid: 902d327dbb7250943a349ae71b11a412, type: 2}
     dropRate: 0.1
   - reward: {fileID: 11400000, guid: 8584497ee147f494a997b450e6a38442, type: 2}
     dropRate: 0.2

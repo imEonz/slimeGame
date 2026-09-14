@@ -28,7 +28,7 @@ public class SwordController : WeaponController
         sprite.gameObject.SetActive(false);
     }
 
-    protected override IEnumerator PerformAttack(Vector2 dir, Transform target)
+    protected override IEnumerator PerformAttack(Vector2 dir, Transform target, Vector2? spawnpos = null)
     {
         if (pierceCount > 0 && projectilePrefab != null)
         {

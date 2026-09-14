@@ -77,11 +77,13 @@ public abstract class WeaponController : MonoBehaviour, IWeaponController
         }
     }
 
-    protected virtual IEnumerator PerformAttack(Vector2 dir, Transform target)
+    protected virtual IEnumerator PerformAttack(Vector2 dir, Transform target, Vector2? spawnPos = null)
     {
-        GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject proj = null;
+        if(spawnPos == null) proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        else proj = Instantiate(projectilePrefab, (Vector2)spawnPos, Quaternion.identity);
         Projectile projectile = proj.GetComponent<Projectile>();
-        projectile.Init(dir, damage, pierceCount, "Enemy");
+        projectile.Init(dir, damage, pierceCount, "Enemy", target);
         yield break;
     }
 
