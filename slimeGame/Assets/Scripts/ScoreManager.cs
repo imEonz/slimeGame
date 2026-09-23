@@ -43,7 +43,7 @@ public class ScoreManager : MonoBehaviour
         time += Time.deltaTime;
         timeText.text = time.ToString("0");
 
-        score += Time.deltaTime;
+        score += Time.deltaTime * 5f;
         UpdateScore();
     }
 

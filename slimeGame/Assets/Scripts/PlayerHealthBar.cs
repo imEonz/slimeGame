@@ -15,12 +15,12 @@ public class PlayerHealthBar : MonoBehaviour
     {
         pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         hpSlider.value = 1;
-        hpText.text = $"{pc.GetPlayerHP()}/{pc.GetPlayerMaxHP()}";
+        hpText.text = $"{pc.GetPlayerHP().ToString("0")}/{pc.GetPlayerMaxHP().ToString("0")}";
     }
 
     public void UpdatePlayerHPBar()
     {
         hpSlider.value = pc.GetPlayerHP()/pc.GetPlayerMaxHP();
-        hpText.text = $"{pc.GetPlayerHP()}/{pc.GetPlayerMaxHP()}";
+        hpText.text = $"{pc.GetPlayerHP().ToString("0")}/{pc.GetPlayerMaxHP().ToString("0")}";
     }
 }
