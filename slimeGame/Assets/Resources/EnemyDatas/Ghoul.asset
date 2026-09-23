@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHP: 30
   speed: 10
   damage: 20
-  staggerChance: 0.15
+  staggerChance: 0.25
   staggerTime: 2.5
   level: 1
   sprite: {fileID: 21300000, guid: 550861cd78149f046a51cb27d6418fe3, type: 3}
@@ -26,5 +26,7 @@ MonoBehaviour:
   - reward: {fileID: 11400000, guid: 8584497ee147f494a997b450e6a38442, type: 2}
     dropRate: 0.2
   - reward: {fileID: 11400000, guid: c836004e19826c047bcda8728944d5f8, type: 2}
-    dropRate: 0.15
+    dropRate: 0.25
   enemyBehaviour: {fileID: 867487023029646664, guid: 2a7dbaddc794a1e42b47c336731e4803, type: 3}
+  enemySkills: []
+  timeBetweenCasts: 0

@@ -10,13 +10,16 @@ public class ScoreManager : MonoBehaviour
     private float score;
     [SerializeField]
     private Dictionary<string, float> triggers = new Dictionary<string, float>();
+    [SerializeField]
+    private GameObject multText;
     private float time;
     [SerializeField]
     TMP_Text timeText;
     [SerializeField]
     TMP_Text scoreText;
     [SerializeField]
-    TMP_Text scoreMultText;
+    private Transform scoreMultText;
+
 
     void Awake()
     {
@@ -52,6 +55,9 @@ public class ScoreManager : MonoBehaviour
         }
 
         triggers.TryGetValue(name, out float triggerScore);
+
+        GameObject go = Instantiate(multText,scoreMultText);
+        go.GetComponent<TMP_Text>().text = "+ " + name;
 
         Debug.Log($"Triggered: " + name);
 
