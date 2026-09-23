@@ -70,6 +70,7 @@ public class SwordController : WeaponController
             if (enemy == null || enemy.enemyState != Enemy.State.Alive) continue;
 
             enemyHit.Add(hit);
+            ScoreManager.Instance.AddScore("Hit",20);
             enemy.TakeDamage(damage);
         }
     }

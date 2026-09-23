@@ -18,7 +18,6 @@ class BulletSkill : EnemySkill
 
     public override bool Tick(float deltaTime)
     {
-        Debug.Log("skill tick");
         timer += deltaTime;
         if (!fired && timer >= windUp)
         {

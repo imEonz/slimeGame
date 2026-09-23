@@ -259,6 +259,7 @@ public class PlayerController : MonoBehaviour
             ConsumeReward(attachedEnemy);
         }
         attachedEnemy.enemyState = Enemy.State.Dead;
+        ScoreManager.Instance.AddScore("Consume",300);
         
         attachedEnemy = null;
         isDashing = false;

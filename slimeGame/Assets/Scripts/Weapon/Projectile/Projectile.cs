@@ -54,6 +54,8 @@ public class Projectile : MonoBehaviour
 
     protected virtual void OnHit(Enemy enemy)
     {
+        ScoreManager.Instance.AddScore("Hit",20);
+        if(hitTargets.Count != 1) ScoreManager.Instance.AddScore("Pierce",40);
         enemy.TakeDamage(damage);
     }
 

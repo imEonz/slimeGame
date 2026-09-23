@@ -108,6 +108,7 @@ public class Enemy : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
             if(staggerChance > Random.Range(0f,1f)) enemyState = State.Stagger;
             else enemyState = State.Dead;
+            ScoreManager.Instance.AddScore("Kill",100);
         }
         enemyHealthBar.UpdateSlider();
     }
@@ -156,7 +157,11 @@ public class Enemy : MonoBehaviour
         float t = Mathf.PingPong(staggerTimer * flashSpeed, 1f);
         spriteRenderer.color = Color.Lerp(originalColor, Color.white, t);
 
-        if(staggerTimer > staggerTime) enemyState = State.Dead;
+        if(staggerTimer > staggerTime)
+        {
+            enemyState = State.Dead;
+            ScoreManager.Instance.AddScore("Kill",100);
+        } 
     }
 
     public void SetOpacity(float opacity)

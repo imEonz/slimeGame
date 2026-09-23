@@ -11,8 +11,10 @@ public class UIManager : MonoBehaviour
     TMP_Text scoreText;
     [SerializeField]
     TMP_Text scoreMultText;
+
     private float score;
     private float time;
+
 
     void Update()
     {
