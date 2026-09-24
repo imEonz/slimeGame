@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
@@ -27,6 +28,8 @@ public class ScoreManager : MonoBehaviour
     private Button saveButton;
     [SerializeField]
     private Button exitButton;
+    [SerializeField]
+    private TMP_Text errorText;
 
 
 
@@ -90,6 +93,13 @@ public class ScoreManager : MonoBehaviour
     {
         saveButton.onClick.AddListener(() =>
         {
+            if(!IsValidName(inputField.text))
+            {
+                errorText.gameObject.SetActive(true);
+                return;
+            }
+            else errorText.gameObject.SetActive(false);
+
             string player = inputField.text;
             GameManager.ScoreData data = new GameManager.ScoreData
             {
@@ -97,7 +107,24 @@ public class ScoreManager : MonoBehaviour
                 score = this.score
             };
             GameManager.Instance.SaveScore(data);
+
+            SceneManager.LoadScene(1);
         });
+        exitButton.onClick.AddListener(()=> SceneManager.LoadScene(1));
+    }
+
+    private bool IsValidName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return false;
+
+        if (name.Length > 10) return false;
+
+        foreach (char c in name)
+        {
+            if (char.IsDigit(c)) return false;
+        }
+
+        return true;
     }
 
 }
