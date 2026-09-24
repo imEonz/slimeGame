@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private bool isCooldown;
 
     private enum Direction { None, Up, Down, Left, Right }
-    public enum State { Still, Moving, Dashing, Consuming}
+    public enum State { Still, Moving, Dashing, Consuming, Dead}
     [SerializeField]
     private State playerState;
 
@@ -59,6 +59,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     WeaponManager weaponManager;
 
+    CameraFollow camera;
+    [SerializeField]
+    private Transform gameOverPanel;
+
     public bool AutoAim = true;
 
     void Awake()
@@ -68,6 +72,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         originalColor = spriteRenderer.color;
+        camera = Camera.main.GetComponent<CameraFollow>();
     }
     public void OnMove(InputValue playerInput)
     {
@@ -104,6 +109,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
+        if(playerState == State.Dead) return;
+
         if(dashInput > 0 && !isCooldown && dashTimer < dashTime)
         {
             if (!isDashing)
@@ -169,6 +176,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleAnimation()
     {
+        if(playerState == State.Dead) return;
+
         AnimatorStateInfo currentState = playerAnimator.GetCurrentAnimatorStateInfo(0);
 
         if (currentState.IsName("dashLeft") || currentState.IsName("dashRight"))
@@ -210,10 +219,11 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         curHP -= damage;
+        camera.Shake();
         if(curHP <= 0)
         {
             curHP = 0;
-            Debug.LogWarning("You died");
+            PlayerDied();
         }
         playerHealthBar.UpdatePlayerHPBar();
     }
@@ -338,5 +348,12 @@ public class PlayerController : MonoBehaviour
     public State GetPlayerState()
     {
         return playerState;
+    }
+
+    private void PlayerDied()
+    {
+        playerState = State.Dead;
+        Time.timeScale = 0f;
+        gameOverPanel.gameObject.SetActive(true);
     }
 }
