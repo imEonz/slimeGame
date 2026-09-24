@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -20,6 +21,14 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private Transform scoreMultText;
 
+    [SerializeField]
+    private TMP_InputField inputField;
+    [SerializeField]
+    private Button saveButton;
+    [SerializeField]
+    private Button exitButton;
+
+
 
     void Awake()
     {
@@ -36,6 +45,8 @@ public class ScoreManager : MonoBehaviour
     {
         score = 0;
         time = 0;
+
+        InitializeButtons();
     }
 
     void Update()
@@ -74,4 +85,19 @@ public class ScoreManager : MonoBehaviour
     {
         return score;
     }
+
+    private void InitializeButtons()
+    {
+        saveButton.onClick.AddListener(() =>
+        {
+            string player = inputField.text;
+            GameManager.ScoreData data = new GameManager.ScoreData
+            {
+                playerName = player,
+                score = this.score
+            };
+            GameManager.Instance.SaveScore(data);
+        });
+    }
+
 }

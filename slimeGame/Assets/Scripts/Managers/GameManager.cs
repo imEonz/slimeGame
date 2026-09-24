@@ -9,10 +9,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     private static string SavePath => Path.Combine(Application.persistentDataPath, "scores.json");
     [Serializable]
-    public class ScoreData
+    public class ScoreData : IComparable<ScoreData>
     {
         public float score;
         public string playerName;
+
+        public int CompareTo(ScoreData other)
+        {
+            return other.score.CompareTo(score);
+        }
     }
 
     [Serializable]
@@ -33,7 +38,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"{SavePath}");
     }
 
-    public static void SaveScore(ScoreData data)
+    public void SaveScore(ScoreData data)
     {
         ScoreDataList list = LoadAll();
         list.scores.Add(data);
