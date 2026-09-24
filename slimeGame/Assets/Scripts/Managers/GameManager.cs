@@ -1,0 +1,59 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance;
+    private static string SavePath => Path.Combine(Application.persistentDataPath, "scores.json");
+    [Serializable]
+    public class ScoreData
+    {
+        public float score;
+        public string playerName;
+    }
+
+    [Serializable]
+    private class ScoreDataList
+    {
+        public List<ScoreData> scores = new List<ScoreData>();
+    }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        Debug.Log($"{SavePath}");
+    }
+
+    public static void SaveScore(ScoreData data)
+    {
+        ScoreDataList list = LoadAll();
+        list.scores.Add(data);
+
+        string json = JsonUtility.ToJson(list, true);
+        File.WriteAllText(SavePath, json);
+        
+    }
+
+    public static List<ScoreData> LoadScores()
+    {
+        return LoadAll().scores;
+    }
+
+    private static ScoreDataList LoadAll()
+    {
+        if (!File.Exists(SavePath)) return new ScoreDataList();
+
+        string json = File.ReadAllText(SavePath);
+        ScoreDataList list = JsonUtility.FromJson<ScoreDataList>(json);
+        return list ?? new ScoreDataList();
+    }
+}
