@@ -95,16 +95,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1013743589967910504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0195c4490c10c5e479bc505a040b35e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 86227f7c139a13045a7f6ff138efdcd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 0
   speed: 20
   target: {fileID: 0}
   pierceCount: 0
-  range: 20
-  deathTimer: 2.3
-  windUp: 0.3
+  range: 10
+  deathTimer: 2
+  windUp: 0.5
 --- !u!61 &7282016478627802992
 BoxCollider2D:
   m_ObjectHideFlags: 0

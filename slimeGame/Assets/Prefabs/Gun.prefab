@@ -94,18 +94,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1542910341248240082}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 480de5c1ee5981f43a12fca17b0b3445, type: 3}
+  m_Script: {fileID: 11500000, guid: 32966c8ba48bfe243be36acda4370367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   projectilePrefab: {fileID: 4375833417746700288, guid: 178d3164875435943b511f779e0b2f7b, type: 3}
-  damage: 20
-  range: 15
-  bulletCooldown: 1.5
-  pierceCount: 1
+  damage: 0
+  range: 10
+  bulletCooldown: 1
+  pierceCount: 0
   shootCount: 1
-  shootdelay: 0.07
+  shootdelay: 0
+  orbitRadius: 1.3
+  orbitOffsetDegrees: 0
   layer:
     serializedVersion: 2
     m_Bits: 64
-  orbitRadius: 1.3

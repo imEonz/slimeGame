@@ -41,9 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2493445840977133712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e50e16d9816b448a964a78418c59f6, type: 3}
+  m_Script: {fileID: 11500000, guid: b979e734a752ff846b557e084684e47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
-  range: 6
-  rangeOffset: 1.25
+  speed: 3
+  range: 5
+  rangeOffset: 0.1

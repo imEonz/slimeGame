@@ -326,14 +326,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2371824276959782641}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15f704a629b29a6448f2f3f4f9ac13ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 8cc6159586d15ee40823c748f24598d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attatchedEnemy: {fileID: 6688542505063714460}
   healthText: {fileID: 2318173319746014951}
   canvasGroup: {fileID: 889610625148556038}
   hpSlider: {fileID: 9124492413987594977}
-  inactiveTime: 4
+  inactiveTime: 3
 --- !u!1 &2577613597174327995
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,14 +463,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4660387846130428271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 741317c43d8919d4792e35cfa531521f, type: 3}
+  m_Script: {fileID: 11500000, guid: 94dcd4f3397a74747ae47f55bca91b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   rb: {fileID: -8954539984011150311}
   em: {fileID: 0}
-  staggerChance: 0.524
-  staggerTime: 2.5
+  staggerChance: 0
+  staggerTime: 0
   enemyHealthBar: {fileID: 3921488245795405269}
   enemyState: 0
   spriteRenderer: {fileID: 4651680904155869882}

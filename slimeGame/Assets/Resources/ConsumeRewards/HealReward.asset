@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9087a49923fdb74fafed5a2efbfe256, type: 3}
+  m_Script: {fileID: 11500000, guid: f56b2eebf7e0e0347ba5fee10aff5f06, type: 3}
   m_Name: HealReward
   m_EditorClassIdentifier: 
   rewardName: Heal

@@ -9,20 +9,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 497a69bf99387764593f24f173a89988, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d360273223830d4aaa1f06b7d306613, type: 3}
   m_Name: Wolf
   m_EditorClassIdentifier: 
   enemyName: Wolf
-  maxHP: 25
-  speed: 10
-  damage: 20
-  staggerChance: 0.15
-  staggerTime: 2.5
-  level: 1
+  maxHP: 30
+  speed: 6
+  damage: 10
+  staggerChance: 0.25
+  staggerTime: 1.75
+  level: 0
   sprite: {fileID: 21300000, guid: b1129c3566ab43245b4098fb344579a8, type: 3}
   lootTable:
   - reward: {fileID: 11400000, guid: 2fd093a278309284d8af72a854a48127, type: 2}
     dropRate: 1
+  - reward: {fileID: 11400000, guid: 8584497ee147f494a997b450e6a38442, type: 2}
+    dropRate: 0.25
   - reward: {fileID: 11400000, guid: ef92ad93bb664f3499c57d3cbabaa8c6, type: 2}
-    dropRate: 0.2
-  enemyBehaviour: {fileID: -7177543201847101687, guid: 83c7c4bb229a60945b86ca89315c9289, type: 3}
+    dropRate: 0.25
+  enemyBehaviour: {fileID: -7177543201847101687, guid: a521996aa6197b443b4d0db41aa0e7f4, type: 3}
+  enemySkills: []
+  timeBetweenCasts: 0

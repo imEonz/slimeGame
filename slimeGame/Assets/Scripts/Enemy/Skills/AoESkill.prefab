@@ -41,13 +41,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7086543816872403398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c01a6fc5cf980942b01ff9327ffe9bd, type: 3}
+  m_Script: {fileID: 11500000, guid: d9c73f14c9f12a849a072d5e6baf2875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blocksMovement: 0
+  blocksMovement: 1
   damage: 15
   radius: 4
   windUp: 0.5
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
