@@ -30,6 +30,8 @@ public class ScoreManager : MonoBehaviour
     private Button exitButton;
     [SerializeField]
     private TMP_Text errorText;
+    [SerializeField]
+    private TMP_Text endScore;
 
 
 
@@ -82,6 +84,7 @@ public class ScoreManager : MonoBehaviour
     private void UpdateScore()
     {
         scoreText.text = "Score: " + score.ToString("0");
+        endScore.text = "Score: " + score.ToString("0");
     }
 
     public float GetScore()

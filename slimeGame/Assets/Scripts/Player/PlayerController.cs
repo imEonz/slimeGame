@@ -65,6 +65,11 @@ public class PlayerController : MonoBehaviour
 
     public bool AutoAim = true;
 
+    [SerializeField]
+    private float hitFlashDuration = 0.15f;
+    private Coroutine hitFlashCoroutine;
+    private bool isFlashing;
+
     void Awake()
     {
         curHP = maxHP;
@@ -116,10 +121,12 @@ public class PlayerController : MonoBehaviour
             if (!isDashing)
             {
                 spriteRenderer.sortingOrder = 5;
+
                 playerState = State.Dashing;
                 dashDirection = moveInput.normalized;
                 Direction dashDir = GetDirection(moveInput);
                 string dashClip = null;
+
                 if (dashDir == Direction.Left) dashClip = "dashLeft";
                 else if (dashDir == Direction.Right) dashClip = "dashRight";
 
@@ -134,9 +141,14 @@ public class PlayerController : MonoBehaviour
             isDashing = true;
             dashTimer += Time.deltaTime;
 
-            Color c = spriteRenderer.color;
-            c.r = Mathf.Lerp(c.r, 0f, 7f * Time.deltaTime);
-            spriteRenderer.color = c;
+
+            if(!isFlashing)
+            {
+                Color c = spriteRenderer.color;
+                c.r = Mathf.Lerp(c.r, 0f, 7f * Time.deltaTime);
+                spriteRenderer.color = c;
+            }
+
 
             curSpeed = math.lerp(curSpeed, dashSpeed, 7f * Time.deltaTime);
 
@@ -148,11 +160,14 @@ public class PlayerController : MonoBehaviour
             if(isDashing || isCooldown)
             {
                 if(playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("dashLeft") || playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("dashRight")) playerAnimator.Play("idle");
+
                 isDashing = false;
                 dashInput = 0f;
                 dashTimer = 0f;
                 isCooldown = true;
+
                 cooldownTimer += Time.deltaTime;
+
                 if(cooldownTimer > dashCooldown) 
                 {
                     cooldownTimer = 0f;
@@ -163,9 +178,13 @@ public class PlayerController : MonoBehaviour
             playerState = State.Moving;
             curSpeed = math.lerp(curSpeed, moveSpeed, 7f * Time.deltaTime);
 
-            Color c = spriteRenderer.color;
-            c.r = Mathf.Lerp(c.r, originalColor.r, 7f * Time.deltaTime);
-            spriteRenderer.color = c;
+            if(!isFlashing)
+            {
+                Color c = spriteRenderer.color;
+                c.r = Mathf.Lerp(c.r, originalColor.r, 7f * Time.deltaTime);
+                spriteRenderer.color = c;
+            }
+
             spriteRenderer.sortingOrder = 3;
         }
 
@@ -219,6 +238,12 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         curHP -= damage;
+
+        SoundManager.Instance.PlaySoundFXClipRandomPitch(SoundManager.Instance.GetAudioClip("Hit"),this.transform,1f);
+
+        if (hitFlashCoroutine != null) StopCoroutine(hitFlashCoroutine);
+        hitFlashCoroutine = StartCoroutine(HitFlash());
+
         camera.Shake();
         if(curHP <= 0)
         {
@@ -355,5 +380,15 @@ public class PlayerController : MonoBehaviour
         playerState = State.Dead;
         Time.timeScale = 0f;
         gameOverPanel.gameObject.SetActive(true);
+    }
+
+    private IEnumerator HitFlash()
+    {
+        isFlashing = true;
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(hitFlashDuration);
+        spriteRenderer.color = originalColor;
+        isFlashing = false;
+        hitFlashCoroutine = null;
     }
 }
