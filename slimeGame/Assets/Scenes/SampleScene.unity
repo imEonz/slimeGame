@@ -1687,14 +1687,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32aace38ec8bce14ba7c86badf9a6b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1922221165}
-  smoothTime: 0.05
-  offset: {x: 0, y: 0, z: -10}
-  defaultDuration: 0.1
-  defaultMagnitude: 0.05
-  useCursorOffset: 1
-  maxCursorOffset: 0.5
-  cursorOffsetSmoothTime: 0.1
 --- !u!1 &587735244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,7 +2586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 066e31ef624b297439591fee07968d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
 --- !u!1 &1225324824
 GameObject:
   m_ObjectHideFlags: 0
@@ -2675,12 +2666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ccdbbe7076149b4c953fceada34c82a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  root: {fileID: 1620800614}
-  progressSlider: {fileID: 242874105}
-  timeToFail: 5
-  dashAmount: 0.1
-  enemyManager: {fileID: 1158483392}
-  camera: {fileID: 519420033}
 --- !u!1 &1345983546
 GameObject:
   m_ObjectHideFlags: 0
@@ -3712,11 +3697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9095c9e1a8b6c1a49b77b53bba786437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1922221164}
-  notificationManager: {fileID: 919521520}
-  activeWeapons: []
-  starterWeapon: {fileID: 11400000, guid: c906db6987312ad458399447afa9f0cd, type: 2}
-  weaponHolder: {fileID: 1225324825}
 --- !u!1 &1741804571
 GameObject:
   m_ObjectHideFlags: 0
@@ -3836,17 +3816,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d845810de5bc4b6498cec468815c7148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  em: {fileID: 1158483392}
-  enemyPrefab: {fileID: 4660387846130428271, guid: 0045b8b0efb18484fab2ffde4337735a, type: 3}
-  spawnTime: 5
-  spawnAmount: 3
-  enemiesFolder: {fileID: 595865348}
-  isOn: 1
-  spawnableEnemies:
-  - {fileID: 11400000, guid: 281edcad7abc6ef43b5461b6b26aceef, type: 2}
-  - {fileID: 11400000, guid: 8390501b90d0e784f88ca1602428c3a6, type: 2}
-  - {fileID: 11400000, guid: fcc7fde1c3069004e9648741d0cc6a5f, type: 2}
-  - {fileID: 11400000, guid: 424f099cf027998479f8f18209afe819, type: 2}
 --- !u!1 &1771266175
 GameObject:
   m_ObjectHideFlags: 0
@@ -4101,8 +4070,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8771d002c72384db3ad5209b79cf3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpText: {fileID: 686298997}
-  hpSlider: {fileID: 1815372383}
 --- !u!1 &1852075443
 GameObject:
   m_ObjectHideFlags: 0
@@ -4344,23 +4311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2afe3aca0ee506a4e9b1d614db7a169e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 160
-  curHP: 160
-  rb: {fileID: 1922221166}
-  moveSpeed: 5
-  dashSpeed: 15
-  curSpeed: 0
-  playerAnimator: {fileID: 1503468369}
-  dashTime: 1
-  dashCooldown: 0.5
-  playerState: 0
-  playerHealthBar: {fileID: 1815372384}
-  consumeIframes: 0.5
-  consumeMinigame: {fileID: 1242584219}
-  spriteRenderer: {fileID: 1503468368}
-  skillManager: {fileID: 2105415403}
-  weaponManager: {fileID: 1653056534}
-  AutoAim: 1
 --- !u!4 &1922221165
 Transform:
   m_ObjectHideFlags: 0
