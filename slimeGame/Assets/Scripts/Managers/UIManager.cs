@@ -2,38 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public enum UIState {idle, pause, tab, level}
     [SerializeField]
-    TMP_Text timeText;
+    private UIState uIState;
     [SerializeField]
-    TMP_Text scoreText;
+    private Transform pauseCanvas;
     [SerializeField]
-    TMP_Text scoreMultText;
+    private Transform tabCanvas;
+    [SerializeField]
+    private Transform levelCanvas;
 
-    private float score;
-    private float time;
+    private PlayerController player;
 
+    void Start()
+    {
+        player = GameObject.FindAnyObjectByType<PlayerController>();
+    }
 
     void Update()
     {
-        time += Time.deltaTime;
-        timeText.text = time.ToString();
+        if(uIState != UIState.idle) return;
     }
 
-    public void AddScore(float add)
+    private void ActivatePause()
     {
-        score += add;
-        scoreText.text = score.ToString();
+        if(!pauseCanvas.gameObject.activeSelf)
+        {
+            pauseCanvas.gameObject.SetActive(true);
+            Time.timeScale = 0f;
+            uIState = UIState.pause;
+        }
+        else
+        {
+            pauseCanvas.gameObject.SetActive(false);
+            if(player.GetPlayerState() != PlayerController.State.Consuming) Time.timeScale = 1f;
+            uIState = UIState.idle;
+        }
     }
 
-    public float GetScore()
+    private void ActivateTab()
     {
-        return score;
+        if(!tabCanvas.gameObject.activeSelf)
+        {
+            tabCanvas.gameObject.SetActive(true);
+            Time.timeScale = 0f;
+            uIState = UIState.tab;
+        }
+        else
+        {
+            tabCanvas.gameObject.SetActive(false);
+            if(player.GetPlayerState() != PlayerController.State.Consuming) Time.timeScale = 1f;
+            uIState = UIState.idle;
+        }
     }
-    public float GetTime()
+
+    public void RegisterEscPress()
     {
-        return time;
+        if(uIState != UIState.level && uIState != UIState.tab) ActivatePause();
+    }
+    public void RegisterTabPress()
+    {
+        if(uIState != UIState.level && uIState != UIState.pause) ActivateTab();
     }
 }

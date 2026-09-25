@@ -44,6 +44,8 @@ public class SwordController : WeaponController
         float t = 0f;
         pivot.rotation = Quaternion.Euler(0, 0, startAngle);
 
+        SoundManager.Instance.PlaySoundFXClip(SoundManager.Instance.GetAudioClip("swing"),this.transform,0.1f);
+
         while (t < slashDuration)
         {
             t += Time.deltaTime;

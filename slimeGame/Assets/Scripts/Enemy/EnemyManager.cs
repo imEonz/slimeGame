@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public List<Enemy> enemies;
+    public float dmgMult;
     void FixedUpdate()
     {
         for (int i = enemies.Count - 1; i >= 0; i--)

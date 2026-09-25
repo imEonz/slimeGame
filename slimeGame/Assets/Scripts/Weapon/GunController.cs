@@ -9,6 +9,7 @@ public class GunController : WeaponController
     {
         if (!CanFire()) return;
         TeleportAroundPlayer();
+        SoundManager.Instance.PlaySoundFXClip(SoundManager.Instance.GetAudioClip("slimeGun"), this.transform,0.1f, Random.Range(0.9f,1.1f));
         base.Shot();
     }
     public void TeleportAroundPlayer()

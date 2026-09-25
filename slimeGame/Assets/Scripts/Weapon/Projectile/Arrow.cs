@@ -6,7 +6,7 @@ using UnityEngine;
 public class Arrow : Projectile
 {
     [SerializeField]
-    private float windUp;
+    public float windUp;
     private enum ArrowState {Idle, Fired}
     private ArrowState arrowState = ArrowState.Idle;
     private Coroutine arrowWindUp;
@@ -47,6 +47,7 @@ public class Arrow : Projectile
             yield return null;
         }
         arrowState = ArrowState.Fired;
+        SoundManager.Instance.PlaySoundFXClip(SoundManager.Instance.GetAudioClip("Arrow"),this.transform,0.08f);
 
     }
 

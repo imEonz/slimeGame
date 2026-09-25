@@ -18,7 +18,7 @@ MonoBehaviour:
   curLevel: 1
   weaponPrefab: {fileID: 5465078692881600025, guid: 8d55a736cf864974081cb7c66e4d1d4b, type: 3}
   baseDamage: 40
-  baseFireRate: 2
+  baseFireRate: 1
   onLevelUps:
   - level: 2
     rewards:
@@ -31,7 +31,7 @@ MonoBehaviour:
       value: 3
       sprite: {fileID: 0}
     - type: 1
-      value: 1.5
+      value: 0.75
       sprite: {fileID: 0}
   - level: 4
     rewards:

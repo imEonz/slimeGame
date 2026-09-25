@@ -9,6 +9,7 @@ public class ArrowController : WeaponController
     private float spreadAngle = 10f;
     [SerializeField]
     private float spacing = 0.5f;
+    private int timesShot;
     protected override void Update()
     {
         Vector2 orbitDir = GetOrbitDirection();
@@ -22,6 +23,7 @@ public class ArrowController : WeaponController
         Vector2 baseDir = GetAttackDirection(out Transform target);
         if (baseDir == Vector2.zero) yield break;
         Vector2 perpendicular = new Vector2(-baseDir.y, baseDir.x);
+        timesShot = 0;
 
         for (int i = 0; i < shootCount; i++)
         {
@@ -30,8 +32,20 @@ public class ArrowController : WeaponController
 
             float offset = (i - (shootCount - 1) / 2f) * spreadAngle;
             Vector2 dir = Rotate(baseDir, offset);
+            timesShot++;
             yield return PerformAttack(dir, target, spawnPos);
         }
+    }
+
+    protected override IEnumerator PerformAttack(Vector2 dir, Transform target, Vector2? spawnPos = null)
+    {
+        GameObject proj = null;
+        if(spawnPos == null) proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        else proj = Instantiate(projectilePrefab, (Vector2)spawnPos, Quaternion.identity);
+        Arrow projectile = proj.GetComponent<Arrow>();
+        projectile.windUp = 0.3f + (0.1f * timesShot);
+        projectile.Init(dir, damage, pierceCount, "Enemy", target);
+        yield break;
     }
 
     private Vector2 Rotate(Vector2 v, float degrees)

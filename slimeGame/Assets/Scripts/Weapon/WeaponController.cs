@@ -156,9 +156,17 @@ public abstract class WeaponController : MonoBehaviour, IWeaponController
     {
         this.damage = damage;
     }
+    public float GetDamage()
+    {
+        return damage;
+    }
     public void SetFireRate(float firerate)
     {
         this.bulletCooldown = firerate;
+    }
+    public float GetFireRate()
+    {
+        return bulletCooldown;
     }
     public void SetPierce(int pierce)
     {

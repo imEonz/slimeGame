@@ -26,7 +26,7 @@ MonoBehaviour:
   - reward: {fileID: 11400000, guid: 8584497ee147f494a997b450e6a38442, type: 2}
     dropRate: 0.25
   - reward: {fileID: 11400000, guid: c836004e19826c047bcda8728944d5f8, type: 2}
-    dropRate: 0.25
+    dropRate: 1
   enemyBehaviour: {fileID: 867487023029646664, guid: 2462d78baade6824cb93cc9e9933e674, type: 3}
   enemySkills: []
   timeBetweenCasts: 0

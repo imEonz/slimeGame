@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
     private float timeBetweenCasts;
     private float castTimer;
     private int skillIndex;
+    [SerializeField]
     private List<EnemyLoot> lootTable = new List<EnemyLoot>();
     private bool isCasting;
 
@@ -102,6 +103,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        float newDamage = damage * em.dmgMult;
         curHP -= damage;
         if(curHP <= 0)
         {

@@ -144,8 +144,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   pivot: {fileID: 2673083521440601423}
-  slashArc: 90
-  slashDuration: 0.2
+  slashArc: 160
+  slashDuration: 0.1
   sprite: {fileID: 4980171141879215073}
 --- !u!61 &8199786273759239664
 BoxCollider2D:

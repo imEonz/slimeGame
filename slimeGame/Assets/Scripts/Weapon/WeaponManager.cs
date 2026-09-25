@@ -55,8 +55,6 @@ public class WeaponManager : MonoBehaviour
         {
             CreateWeapon(weaponReward);
         }
-
-        
     }
 
 
@@ -76,6 +74,7 @@ public class WeaponManager : MonoBehaviour
 
                 case WeaponLevelReward.RewardType.FireRate:
                     foreach(var item in weapon.controllers) item.SetFireRate(reward.value);
+                   
                     break;
 
                 case WeaponLevelReward.RewardType.AddInstance:
@@ -123,9 +122,12 @@ public class WeaponManager : MonoBehaviour
         if(existing != null)
         {
             existing.controllers.Add(newController);
+
             newController.SetDamage(weaponData.BaseDamage);
-            newController.SetFireRate(weaponData.BaseFireRate);        
+            newController.SetFireRate(weaponData.BaseFireRate);
+
             SyncWeaponToCurLevel(existing, newController);     
+            
         }
         else
         {
@@ -134,11 +136,15 @@ public class WeaponManager : MonoBehaviour
                 data = weaponData,
                 controllers = new List<WeaponController>()
             };
+
             newWeapon.controllers.Add(newController);
             activeWeapons.Add(newWeapon);        
-            newController.SetDamage(weaponData.BaseDamage);
-            newController.SetFireRate(weaponData.BaseFireRate);        
+
+            newController.SetDamage(weaponData.BaseDamage);  
+            newController.SetFireRate(weaponData.BaseFireRate);
+
             ApplyLevelReward(newWeapon, GetLevelUp(newWeapon));
+            
             notificationManager.ShowPickup(newWeapon);
         }
     }
@@ -161,6 +167,7 @@ public class WeaponManager : MonoBehaviour
                         break;
                     case WeaponLevelReward.RewardType.FireRate:
                         controller.SetFireRate(reward.value);
+                        
                         break;
                     case WeaponLevelReward.RewardType.Pierce:
                         controller.SetPierce((int)reward.value);

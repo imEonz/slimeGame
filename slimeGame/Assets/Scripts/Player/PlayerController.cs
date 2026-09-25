@@ -55,9 +55,11 @@ public class PlayerController : MonoBehaviour
     private Color originalColor;
 
     [SerializeField]
-    SkillManager skillManager;
+    private SkillManager skillManager;
     [SerializeField]
-    WeaponManager weaponManager;
+    private WeaponManager weaponManager;
+
+    private UIManager uIManager;
 
     CameraFollow camera;
     [SerializeField]
@@ -78,6 +80,8 @@ public class PlayerController : MonoBehaviour
     {
         originalColor = spriteRenderer.color;
         camera = Camera.main.GetComponent<CameraFollow>();
+
+        uIManager = GameObject.FindAnyObjectByType<UIManager>();
     }
     public void OnMove(InputValue playerInput)
     {
@@ -97,6 +101,15 @@ public class PlayerController : MonoBehaviour
     {
         if(AutoAim) AutoAim = false;
         else AutoAim = true;
+    }
+
+    private void OnTab(InputValue playerInput)
+    {
+        uIManager.RegisterTabPress();
+    }
+    private void OnPause(InputValue playerInput)
+    {
+        uIManager.RegisterEscPress();
     }
 
     private void FixedUpdate()
@@ -352,9 +365,6 @@ public class PlayerController : MonoBehaviour
                 curHP = curHP * ((level * 0.1f) +1);
                 playerHealthBar.UpdatePlayerHPBar();
                 break;
-            case StatType.DMG:
-                // I need this to communicate with the weapon manager which i havent added
-                break;
             case StatType.Speed:
                 moveSpeed = moveSpeed + (level * 1.2f);
                 break;
@@ -363,9 +373,6 @@ public class PlayerController : MonoBehaviour
                 break;
             case StatType.DashCooldown:
             dashCooldown = dashCooldown/(2 + (5 - level));
-                break;
-            case StatType.Firerate:
-                // I need this to communicate with the weapon manager which i havent added
                 break;
         }
     }
