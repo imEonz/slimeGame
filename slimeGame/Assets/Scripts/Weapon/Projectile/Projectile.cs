@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour
     public int pierceCount;
     public float range;
     protected Vector2 direction;
+
+    [SerializeField]
     private readonly HashSet<Collider2D> hitTargets = new HashSet<Collider2D>();
     private string layer;
     

@@ -33,6 +33,9 @@ MonoBehaviour:
     - type: 1
       value: 0.75
       sprite: {fileID: 0}
+    - type: 5
+      value: 10
+      sprite: {fileID: 0}
   - level: 4
     rewards:
     - type: 0

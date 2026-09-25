@@ -49,6 +49,14 @@ public class PlayerLeveler : MonoBehaviour
 
             ApplyLevelReward(test);
         }
+        if(Input.GetKeyDown(KeyCode.O))
+        {
+            LevelReward test = new LevelReward();
+            test.amount = 0.5f;
+            test.rewardType = LevelReward.RewardType.DMG;
+
+            ApplyLevelReward(test);
+        }
     }
 
     public void ApplyLevelReward(LevelReward levelReward)
@@ -57,7 +65,7 @@ public class PlayerLeveler : MonoBehaviour
         {
             case LevelReward.RewardType.DMG:
             dmgMult += levelReward.amount;
-            enemyManager.dmgMult = this.dmgMult;
+            weaponManager.SetDmgMult(this.dmgMult);
             break;
             case LevelReward.RewardType.HP:
             hpMult += levelReward.amount;
@@ -71,6 +79,7 @@ public class PlayerLeveler : MonoBehaviour
             {
                 firerateMult = 0.5f;
             }
+            weaponManager.SetFirerateMult(firerateMult);
             break;
         }
         levelReward.applied = true;

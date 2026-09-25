@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        float newDamage = damage * em.dmgMult;
+        // float newDamage = damage * em.dmgMult;
         curHP -= damage;
         if(curHP <= 0)
         {

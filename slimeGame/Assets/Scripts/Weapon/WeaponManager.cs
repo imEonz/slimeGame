@@ -18,6 +18,19 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]
     private Transform weaponHolder;
 
+    private float firerateMult = 1f;
+    private float dmgMult = 1f;
+    public void SetFirerateMult(float mult)
+    {
+        firerateMult = mult;
+        RecalculateAll();
+    }
+    public void SetDmgMult(float mult)
+    {
+        dmgMult = mult;
+        RecalculateAll();
+    }
+
     void Start()
     {
         PickupWeapon(starterWeapon);
@@ -42,12 +55,21 @@ public class WeaponManager : MonoBehaviour
             {
                 existing.curLevel++;
                 existing.experience = 0;
-                foreach(OnLevelUp item in weaponReward.OnLevelUps)
+
+                foreach (OnLevelUp item in weaponReward.OnLevelUps)
                 {
-                    if(item.level != existing.curLevel) continue;
-                    ApplyLevelReward(existing,item);
+                    if (item.level != existing.curLevel) continue;
+                    foreach (var reward in item.rewards)
+                    {
+                        if (reward.type == WeaponLevelReward.RewardType.AddInstance)
+                        {
+                            for (int i = 0; i < reward.value; i++)
+                                CreateWeapon(weaponReward);
+                        }
+                    }
                 }
 
+                RecalculateWeapon(existing);
             }
             notificationManager.ShowPickup(existing);
         }
@@ -57,129 +79,72 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-
-    private void ApplyLevelReward(ActiveWeapon weapon, OnLevelUp levelData)
-    {
-        WeaponReward weaponData = (WeaponReward)weapon.data;
-        if (weaponData == null) return;
-        if(levelData == null) return;
-
-        foreach (WeaponLevelReward reward in levelData.rewards)
-        {
-            switch (reward.type)
-            {
-                case WeaponLevelReward.RewardType.Damage:
-                    foreach(var item in weapon.controllers) item.SetDamage(reward.value);
-                    break;
-
-                case WeaponLevelReward.RewardType.FireRate:
-                    foreach(var item in weapon.controllers) item.SetFireRate(reward.value);
-                   
-                    break;
-
-                case WeaponLevelReward.RewardType.AddInstance:
-                    for (int i = 0; i < reward.value; i++)
-                    {
-                        CreateWeapon(weaponData);
-                    }
-                    break;
-                case WeaponLevelReward.RewardType.SpriteChange:
-                
-                    break;
-                case WeaponLevelReward.RewardType.Pierce:
-                    foreach(var item in weapon.controllers) item.SetPierce((int)reward.value);
-                    break;
-
-                case WeaponLevelReward.RewardType.Count:
-                    foreach(var item in weapon.controllers) item.SetShootCount((int)reward.value);
-                    break;
-
-                case WeaponLevelReward.RewardType.Range:
-                    foreach(var item in weapon.controllers) item.SetRange(reward.value);
-                    break;
-            }
-        }
-    }
-    
-    private OnLevelUp GetLevelUp(ActiveWeapon activeWeapon)
-    {
-        OnLevelUp highest = null;
-        WeaponReward weaponData = (WeaponReward)activeWeapon.data;
-        foreach(OnLevelUp item in weaponData.OnLevelUps)
-        {
-            if(item.level != activeWeapon.curLevel) continue;
-            highest = item;
-        }
-        return highest;
-    }
-
     private void CreateWeapon(WeaponReward weaponData)
     {
         ActiveWeapon existing = activeWeapons.Find(w => w.data == weaponData);
         GameObject go = Instantiate(weaponData.WeaponPrefab, weaponHolder);
         WeaponController newController = go.GetComponent<WeaponController>();
 
-        if(existing != null)
+        if (existing != null)
         {
             existing.controllers.Add(newController);
-
-            newController.SetDamage(weaponData.BaseDamage);
-            newController.SetFireRate(weaponData.BaseFireRate);
-
-            SyncWeaponToCurLevel(existing, newController);     
-            
+            RecalculateWeapon(existing);
         }
         else
         {
             ActiveWeapon newWeapon = new ActiveWeapon
             {
                 data = weaponData,
-                controllers = new List<WeaponController>()
+                controllers = new List<WeaponController> { newController }
             };
-
-            newWeapon.controllers.Add(newController);
-            activeWeapons.Add(newWeapon);        
-
-            newController.SetDamage(weaponData.BaseDamage);  
-            newController.SetFireRate(weaponData.BaseFireRate);
-
-            ApplyLevelReward(newWeapon, GetLevelUp(newWeapon));
-            
+            activeWeapons.Add(newWeapon);
+            RecalculateWeapon(newWeapon);
             notificationManager.ShowPickup(newWeapon);
         }
     }
 
-    private void SyncWeaponToCurLevel(ActiveWeapon activeWeapon, WeaponController controller)
+    private void RecalculateAll()
     {
-        WeaponReward weaponData = (WeaponReward)activeWeapon.data;
+        foreach (var weapon in activeWeapons) RecalculateWeapon(weapon);
+    }
+
+    private void RecalculateWeapon(ActiveWeapon weapon)
+    {
+        WeaponReward weaponData = (WeaponReward)weapon.data;
         if (weaponData == null) return;
+
+        float rawFireRate = weaponData.BaseFireRate;
+        float rawDamage = weaponData.BaseDamage;
+        int pierce = 0, count = 0;
+        float range = 0;
 
         foreach (OnLevelUp levelUp in weaponData.OnLevelUps)
         {
-            if (levelUp.level > activeWeapon.curLevel) continue;
+            if (levelUp.level > weapon.curLevel) continue;
 
             foreach (WeaponLevelReward reward in levelUp.rewards)
             {
                 switch (reward.type)
                 {
-                    case WeaponLevelReward.RewardType.Damage:
-                        controller.SetDamage(reward.value);
-                        break;
-                    case WeaponLevelReward.RewardType.FireRate:
-                        controller.SetFireRate(reward.value);
-                        
-                        break;
-                    case WeaponLevelReward.RewardType.Pierce:
-                        controller.SetPierce((int)reward.value);
-                        break;
-                    case WeaponLevelReward.RewardType.Count:
-                        controller.SetShootCount((int)reward.value);
-                        break;
-                    case WeaponLevelReward.RewardType.Range:
-                        controller.SetRange(reward.value);
-                        break;
+                    case WeaponLevelReward.RewardType.FireRate: rawFireRate = reward.value; break;
+                    case WeaponLevelReward.RewardType.Damage:   rawDamage = reward.value;   break;
+                    case WeaponLevelReward.RewardType.Pierce:   pierce = (int)reward.value; break;
+                    case WeaponLevelReward.RewardType.Count:    count = (int)reward.value;  break;
+                    case WeaponLevelReward.RewardType.Range:    range = reward.value;       break;
                 }
             }
+        }
+
+        float finalFireRate = rawFireRate * firerateMult;
+        float finalDamage = rawDamage * dmgMult;
+
+        foreach (var controller in weapon.controllers)
+        {
+            controller.SetFireRate(finalFireRate);
+            controller.SetDamage(finalDamage);
+            if (pierce > 0) controller.SetPierce(pierce);
+            if (count > 0) controller.SetShootCount(count);
+            if (range > 0) controller.SetRange(range);
         }
     }
 }
