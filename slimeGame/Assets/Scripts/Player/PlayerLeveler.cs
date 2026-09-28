@@ -102,9 +102,9 @@ public class PlayerLeveler : MonoBehaviour
             break;
             case LevelReward.RewardType.FIRERATE:
             firerateMult += levelReward.amount;
-            if(firerateMult < 0.5f) 
+            if(firerateMult < 0.1f) 
             {
-                firerateMult = 0.5f;
+                firerateMult = 0.1f;
             }
             weaponManager.SetFirerateMult(firerateMult);
             break;
@@ -168,7 +168,7 @@ public class PlayerLeveler : MonoBehaviour
         }
         itemName.text = levelReward.nameReward;
         itemDesc.text = levelReward.desc;
-        itemAmount.text = levelReward.amount.ToString();
+        itemAmount.text = $"{levelReward.amount * 100}%";
         itemRarity.text = levelReward.rewardRarity.ToString();
 
     }
