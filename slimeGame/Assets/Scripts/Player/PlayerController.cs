@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -71,6 +72,9 @@ public class PlayerController : MonoBehaviour
     private float hitFlashDuration = 0.15f;
     private Coroutine hitFlashCoroutine;
     private bool isFlashing;
+  
+    [SerializeField]
+    private GameObject damageNum;
 
     void Awake()
     {
@@ -253,6 +257,11 @@ public class PlayerController : MonoBehaviour
         curHP -= damage;
 
         SoundManager.Instance.PlaySoundFXClipRandomPitch(SoundManager.Instance.GetAudioClip("Hit"),this.transform,1f);
+
+        GameObject number = Instantiate(damageNum);
+        number.transform.Find("Text").GetComponent<TMP_Text>().text = "-" + damage.ToString("0");
+        number.transform.position = this.transform.position;
+        Destroy(number,0.5f);
 
         if (hitFlashCoroutine != null) StopCoroutine(hitFlashCoroutine);
         hitFlashCoroutine = StartCoroutine(HitFlash());

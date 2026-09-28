@@ -475,6 +475,8 @@ MonoBehaviour:
   enemyState: 0
   spriteRenderer: {fileID: 4651680904155869882}
   flashSpeed: 10
+  lootTable: []
+  damageNum: {fileID: 6128581707289978850, guid: e24de863a0f0e774aacf2c22786b4657, type: 3}
 --- !u!50 &-8954539984011150311
 Rigidbody2D:
   serializedVersion: 4

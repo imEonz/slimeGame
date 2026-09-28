@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
 
@@ -42,6 +43,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private List<EnemyLoot> lootTable = new List<EnemyLoot>();
     private bool isCasting;
+
+    [SerializeField]
+    private GameObject damageNum;
 
     void Start()
     {
@@ -104,6 +108,12 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         // float newDamage = damage * em.dmgMult;
+
+        GameObject number = Instantiate(damageNum);
+        number.transform.Find("Text").GetComponent<TMP_Text>().text = "-" + damage.ToString("0");
+        number.transform.position = this.transform.position;
+        Destroy(number,0.5f);
+
         curHP -= damage;
         if(curHP <= 0)
         {
