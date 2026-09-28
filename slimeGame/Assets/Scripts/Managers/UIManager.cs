@@ -17,10 +17,12 @@ public class UIManager : MonoBehaviour
     private Transform levelCanvas;
 
     private PlayerController player;
+    private PlayerLeveler playerLeveler;
 
     void Start()
     {
         player = GameObject.FindAnyObjectByType<PlayerController>();
+        playerLeveler = FindAnyObjectByType<PlayerLeveler>();
     }
 
     void Update()
@@ -57,6 +59,21 @@ public class UIManager : MonoBehaviour
             tabCanvas.gameObject.SetActive(false);
             if(player.GetPlayerState() != PlayerController.State.Consuming) Time.timeScale = 1f;
             uIState = UIState.idle;
+        }
+    }
+    public void ActivateLevel()
+    {
+        if(!levelCanvas.gameObject.activeSelf)
+        {
+            levelCanvas.gameObject.SetActive(true);
+            Time.timeScale = 0f;
+            uIState = UIState.level;
+        }
+        else
+        {
+            levelCanvas.gameObject.SetActive(false);
+            if(player.GetPlayerState() != PlayerController.State.Consuming) Time.timeScale = 1f;
+            uIState = UIState.level;
         }
     }
 
