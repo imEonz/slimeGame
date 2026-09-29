@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
         {
             levelCanvas.gameObject.SetActive(false);
             if(player.GetPlayerState() != PlayerController.State.Consuming) Time.timeScale = 1f;
-            uIState = UIState.level;
+            uIState = UIState.idle;
         }
     }
 

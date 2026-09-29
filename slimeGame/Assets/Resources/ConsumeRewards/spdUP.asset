@@ -17,3 +17,9 @@ MonoBehaviour:
   maxLevel: 5
   curLevel: 1
   statType: 2
+  scaling:
+  - 1.05
+  - 1.1
+  - 1.2
+  - 1.3
+  - 1.5

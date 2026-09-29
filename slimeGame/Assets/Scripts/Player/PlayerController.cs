@@ -8,18 +8,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float baseMaxHP = 160f;
+    [SerializeField] private float baseMoveSpeed = 5f;
+    [SerializeField] private float baseDashSpeed = 15f;
+    [SerializeField] private float baseDashCooldown = 0.5f;
 
-    [SerializeField]
     private float maxHP;
-    [SerializeField]
-    private float curHP;
-
+    private float curHP;    
+    private float moveSpeed;
+    private float dashSpeed;
+    private float dashCooldown;
     [SerializeField]
     private Rigidbody2D rb;
-    [SerializeField]
-    private float moveSpeed = 5f;
-    [SerializeField]
-    private float dashSpeed = 15f;
+
     private Vector2 dashDirection;
     [SerializeField]
     private float curSpeed;
@@ -33,8 +34,7 @@ public class PlayerController : MonoBehaviour
     private float dashTime;
     private float dashTimer;
     private bool isDashing;
-    [SerializeField]
-    private float dashCooldown;
+
     private float cooldownTimer;
     private bool isCooldown;
 
@@ -76,6 +76,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject damageNum;
 
+    [SerializeField]
+    private PlayerLeveler playerLeveler;
+    private Dictionary<StatType,StatBuffReward> statBuffs = new Dictionary<StatType, StatBuffReward>();
+
     void Awake()
     {
         curHP = maxHP;
@@ -86,6 +90,9 @@ public class PlayerController : MonoBehaviour
         camera = Camera.main.GetComponent<CameraFollow>();
 
         uIManager = GameObject.FindAnyObjectByType<UIManager>();
+        playerLeveler = FindAnyObjectByType<PlayerLeveler>();
+
+        RecalculateStats();
     }
     public void OnMove(InputValue playerInput)
     {
@@ -277,12 +284,30 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag != "Enemy") return;
-        Enemy enemy = collision.GetComponent<Enemy>();
-
-        if(enemy.enemyState == Enemy.State.Alive && playerState == State.Moving || playerState == State.Still)
+        if (collision.CompareTag("EXP"))
         {
-            if(consumeTimer < consumeIframes) return;
+            if (collision.TryGetComponent(out ExperienceDrop drop))
+            {
+                playerLeveler.AddXP(drop.GetXP());
+                Destroy(collision.gameObject);
+            }
+            return;
+        }
+
+        if (collision.CompareTag("Enemy") && collision.TryGetComponent(out Enemy enemy))
+        {
+            HandleEnemyContact(enemy);
+        }
+    }
+
+
+    private void HandleEnemyContact(Enemy enemy)
+    {
+        bool playerVulnerable = playerState == State.Moving || playerState == State.Still;
+
+        if (enemy.enemyState == Enemy.State.Alive && playerVulnerable)
+        {
+            if (consumeTimer < consumeIframes) return;
             TakeDamage(enemy.GetDamage());
         }
         else if (enemy.enemyState == Enemy.State.Stagger && playerState == State.Dashing)
@@ -294,7 +319,6 @@ public class PlayerController : MonoBehaviour
             transform.position = enemy.transform.position;
             consumeMinigame.StartConsuming(attachedEnemy, OnConsumeComplete);
         }
-
     }
 
     private void HandleConsuming()
@@ -365,25 +389,32 @@ public class PlayerController : MonoBehaviour
         playerHealthBar.UpdatePlayerHPBar();
     }
 
-    public void ApplyStatBuff(StatType statType, int level)
+    public void ApplyStatBuff(StatBuffReward reward)
     {
-        switch (statType)
-        {
-            case StatType.MaxHP:
-                maxHP = maxHP * ((level * 0.1f) +1);
-                curHP = curHP * ((level * 0.1f) +1);
-                playerHealthBar.UpdatePlayerHPBar();
-                break;
-            case StatType.Speed:
-                moveSpeed = moveSpeed + (level * 1.2f);
-                break;
-            case StatType.Dash:
-                dashSpeed =  dashSpeed + (level * 3.5f);
-                break;
-            case StatType.DashCooldown:
-            dashCooldown = dashCooldown/(2 + (5 - level));
-                break;
-        }
+        statBuffs[reward.GetStatType()] = reward;
+        RecalculateStats();
+    }
+
+    private float BuffValue(StatType type)
+    {
+        return statBuffs.TryGetValue(type, out var r) ? r.GetValue(r.curLevel) : 0f;
+    }
+
+    public void RecalculateStats()
+    {
+        float buffedMaxHP    = baseMaxHP       * (1f + BuffValue(StatType.MaxHP) * 0.1f);
+        float buffedSpeed    = baseMoveSpeed   + BuffValue(StatType.Speed) * 1.2f;
+        float buffedDash     = baseDashSpeed   + BuffValue(StatType.Dash) * 3.5f;
+        float buffedCooldown = baseDashCooldown / (1f + BuffValue(StatType.DashCooldown) * 0.15f);
+
+        float hpRatio = maxHP > 0 ? curHP / maxHP : 1f;
+        maxHP        = buffedMaxHP * playerLeveler.GetHPMult();
+        curHP        = maxHP * hpRatio;
+        moveSpeed    = buffedSpeed * playerLeveler.GetSPDMult();
+        dashSpeed    = buffedDash  * playerLeveler.GetSPDMult();
+        dashCooldown = buffedCooldown;
+
+        playerHealthBar.UpdatePlayerHPBar();
     }
 
     public State GetPlayerState()

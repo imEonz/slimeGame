@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4929078762254419011}
   - component: {fileID: 657548226108331699}
   - component: {fileID: 5739561680548785051}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6436615903685510499}
   - component: {fileID: 9124492413987594977}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4867322831731157222}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 599473033046579496}
   - component: {fileID: 889610625148556038}
   - component: {fileID: 3921488245795405269}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: HeathBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,6 +477,7 @@ MonoBehaviour:
   flashSpeed: 10
   lootTable: []
   damageNum: {fileID: 6128581707289978850, guid: e24de863a0f0e774aacf2c22786b4657, type: 3}
+  xpDrop: {fileID: 3206100424928504368, guid: 14e019e52d4a17f489e4de2c868673d9, type: 3}
 --- !u!50 &-8954539984011150311
 Rigidbody2D:
   serializedVersion: 4
@@ -548,7 +549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1627128135733827601}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,7 +587,7 @@ GameObject:
   - component: {fileID: 2529784862933408571}
   - component: {fileID: 6931441248645472422}
   - component: {fileID: 2318173319746014951}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: HPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +721,7 @@ GameObject:
   - component: {fileID: 3809377347428467673}
   - component: {fileID: 9012324727822959525}
   - component: {fileID: 7735817284152707180}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -768,7 +769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

@@ -111,6 +111,7 @@ public class PlayerLeveler : MonoBehaviour
         }
         levelReward.applied = true;
         levelRewards.Add(levelReward);
+        player.RecalculateStats();
     }
 
     private void InitializeCards()
@@ -180,10 +181,19 @@ public class PlayerLeveler : MonoBehaviour
         IsLeveling = true;
         level++;
         neededXP = neededXP * 1.2f;
-        curXP = 0f;
 
         InitializeCards();
         uIManager.ActivateLevel();
+    }
+    public void AddXP(float xp)
+    {
+        curXP += xp;
+        if(curXP >= neededXP)
+        {            
+            float leftover = neededXP - curXP;
+            curXP = leftover;
+            OnLevelUp();
+        }
     }
     private float RollAmount(LevelReward.RewardType type, LevelReward.RewardRarity rarity)
     {

@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -46,11 +43,12 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private GameObject damageNum;
+    [SerializeField]
+    private GameObject xpDrop;
 
     void Start()
     {
         enemyState = State.Alive;
-        transform.position = new Vector2(Random.Range(-xRange,xRange), Random.Range(-yRange,yRange));
 
         originalColor = spriteRenderer.color;
         
@@ -70,6 +68,7 @@ public class Enemy : MonoBehaviour
         else if (enemyState == State.Dead)
         {
             em.enemies.Remove(this);
+            Instantiate(xpDrop, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
 
