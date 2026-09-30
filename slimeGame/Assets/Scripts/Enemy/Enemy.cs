@@ -13,8 +13,6 @@ public class Enemy : MonoBehaviour
     public Transform player;
     public Rigidbody2D rb;
     private float speed = 5f;
-    private float xRange = 25f;
-    private float yRange = 12.5f;
     public EnemyManager em;
 
     [SerializeField, Range(0f,1f)]

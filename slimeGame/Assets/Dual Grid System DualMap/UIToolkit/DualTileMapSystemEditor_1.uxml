@@ -1,0 +1,17 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Dual%20Grid%20System%20DualMap/UIToolkit/Styles/UnityEditor_1.uss?fileID=7433441132597879392&amp;guid=0f5410b11e5564147b6429e47552c241&amp;type=3#UnityEditor_1" />
+    <engine:VisualElement name="Panel_1" style="flex-grow: 1;">
+        <engine:VisualElement name="vars" style="flex-grow: 1;">
+            <engine:Button text="Create Dual Tilemap" name="CreateDualTilemap" emoji-fallback-support="true" class="Button_1" style="background-color: rgb(94, 132, 96);" />
+            <engine:Button text="Clear Tilemap" name="ClearTilemap" class="Button_1" style="background-color: rgb(114, 69, 69);" />
+            <editor:PropertyField binding-path="mainMap" name="MainMap" />
+            <editor:PropertyField name="Dualmap" binding-path="dualMap" />
+            <editor:PropertyField binding-path="targetMainTile" data-source-type="UnityEditor.PackageManager.UI.Internal.PackageDetailsImagesTab+&lt;&gt;c__DisplayClass12_1, UnityEditor.CoreModule" focusable="false" name="TargetMainTile" style="display: flex; visibility: visible;" />
+            <editor:PropertyField binding-path="excludeMain" data-source-type="UnityEditor.PackageManager.UI.Internal.PackageDetailsImagesTab+&lt;&gt;c__DisplayClass12_1, UnityEditor.CoreModule" focusable="false" name="ExcludeMain" style="display: flex; visibility: visible;" />
+            <editor:PropertyField binding-path="targetStairTile" data-source-type="UnityEditor.PackageManager.UI.Internal.PackageDetailsImagesTab+&lt;&gt;c__DisplayClass12_1, UnityEditor.CoreModule" focusable="false" name="TargetStairTile" style="display: flex; visibility: visible;" />
+            <editor:PropertyField binding-path="bounds" data-source-type="UnityEditor.PackageManager.UI.Internal.PackageDetailsImagesTab+&lt;&gt;c__DisplayClass12_1, UnityEditor.CoreModule" focusable="false" name="Bounds" language-direction="Inherit" enabled="true" style="display: flex; visibility: visible; opacity: 1; background-image: none; background-repeat: no-repeat no-repeat; -unity-background-image-tint-color: rgb(255, 255, 255); -unity-background-scale-mode: stretch-to-fill; -unity-slice-left: 0; -unity-slice-top: 0; -unity-slice-right: 0; -unity-slice-bottom: 0; background-position-y: center 0; -unity-slice-scale: 1px;" />
+            <editor:PropertyField binding-path="ruleTilesData" data-source-type="UnityEditor.PackageManager.UI.Internal.PackageDetailsImagesTab+&lt;&gt;c__DisplayClass12_1, UnityEditor.CoreModule" focusable="false" name="DualTiles" style="display: flex; visibility: visible;" />
+            <editor:PropertyField name="DynamicUpdate" binding-path="dynamicUpdate" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

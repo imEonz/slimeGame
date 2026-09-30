@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84ff4ee2d93923847ab63698213168cd, type: 3}
+  m_Name: DirtDualRuleTile
+  m_EditorClassIdentifier: 
+  tileRules:
+  - tileBase: {fileID: 11400000, guid: 7a09ab1153f048442a367748f4d1254d, type: 2}
+    moduleRule:
+      topRight: 4
+      topLeft: 4
+      bottomRight: 1
+      bottomLeft: 4
+  - tileBase: {fileID: 11400000, guid: 332a2b2aca6104541a21e180bf9ae5b0, type: 2}
+    moduleRule:
+      topRight: 4
+      topLeft: 4
+      bottomRight: 4
+      bottomLeft: 1
+  - tileBase: {fileID: 11400000, guid: 58e1974f4f6b3514aac8362bacdb8e35, type: 2}
+    moduleRule:
+      topRight: 1
+      topLeft: 4
+      bottomRight: 4
+      bottomLeft: 4
+  - tileBase: {fileID: 11400000, guid: 3e1b3f7b37d06f64f96f2bd1ba84564f, type: 2}
+    moduleRule:
+      topRight: 4
+      topLeft: 1
+      bottomRight: 4
+      bottomLeft: 4
+  - tileBase: {fileID: 11400000, guid: 64923fef2a75b2f41b29507b5ec67354, type: 2}
+    moduleRule:
+      topRight: 1
+      topLeft: 1
+      bottomRight: 4
+      bottomLeft: 4
+  - tileBase: {fileID: 11400000, guid: 2582214a7ae9e754f976dda562687018, type: 2}
+    moduleRule:
+      topRight: 4
+      topLeft: 4
+      bottomRight: 1
+      bottomLeft: 1
+  - tileBase: {fileID: 11400000, guid: 657f86d6f21931c4ca7180aafdf3e577, type: 2}
+    moduleRule:
+      topRight: 4
+      topLeft: 1
+      bottomRight: 4
+      bottomLeft: 1
+  - tileBase: {fileID: 11400000, guid: f0554334e7986f44791f2d0ece34288f, type: 2}
+    moduleRule:
+      topRight: 1
+      topLeft: 4
+      bottomRight: 1
+      bottomLeft: 4
+  - tileBase: {fileID: 11400000, guid: 91726e5a771e3814e830c298c43b4999, type: 2}
+    moduleRule:
+      topRight: 0
+      topLeft: 1
+      bottomRight: 1
+      bottomLeft: 1
+  - tileBase: {fileID: 11400000, guid: 235a7d60ba7333b4da31c05272bdc596, type: 2}
+    moduleRule:
+      topRight: 1
+      topLeft: 0
+      bottomRight: 1
+      bottomLeft: 1
+  - tileBase: {fileID: 11400000, guid: c4102a287736f0f49baedb5ccbaa24c3, type: 2}
+    moduleRule:
+      topRight: 1
+      topLeft: 1
+      bottomRight: 1
+      bottomLeft: 0
+  - tileBase: {fileID: 11400000, guid: ab20e56f1799c04419ca488a58653ee6, type: 2}
+    moduleRule:
+      topRight: 1
+      topLeft: 1
+      bottomRight: 0
+      bottomLeft: 1
+  - tileBase: {fileID: 11400000, guid: ac05ca6971b42944ca566ba1e97b3461, type: 2}
+    moduleRule:
+      topRight: 1
+      topLeft: 0
+      bottomRight: 0
+      bottomLeft: 1
+  - tileBase: {fileID: 11400000, guid: 6f1e4389c63f2e84185096918c66fbb4, type: 2}
+    moduleRule:
+      topRight: 0
+      topLeft: 1
+      bottomRight: 1
+      bottomLeft: 0
+  - tileBase: {fileID: 11400000, guid: 3a53f6c8cdedd094f852353e05d82582, type: 2}
+    moduleRule:
+      topRight: 3
+      topLeft: 3
+      bottomRight: 3
+      bottomLeft: 3

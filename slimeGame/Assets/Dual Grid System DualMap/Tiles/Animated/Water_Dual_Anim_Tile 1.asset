@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: Water_Dual_Anim_Tile 1
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: -6819299577495130538, guid: 84dd8fcae1772c84784e55e5be514716, type: 3}
+  - {fileID: -375763118, guid: 97778fdd116aef7498e3abdba2952d61, type: 3}
+  - {fileID: 3125084969721542118, guid: 8e6445d71df86dc4c966e1878afaf6fd, type: 3}
+  - {fileID: 6215894026707348368, guid: f93101740dbdcde4db2165d6369adae7, type: 3}
+  m_MinSpeed: 4
+  m_MaxSpeed: 4
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0
