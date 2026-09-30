@@ -33,8 +33,11 @@ public class PlayerLeveler : MonoBehaviour
     private EnemyManager enemyManager;
     private UIManager uIManager;
     private List<LevelReward> levelRewards = new List<LevelReward>();
+    [SerializeField]
     private int level = 1;
+    [SerializeField]
     private float curXP;
+    [SerializeField]
     private float neededXP;
     private bool IsLeveling;
 
@@ -43,6 +46,12 @@ public class PlayerLeveler : MonoBehaviour
     [SerializeField]
     private Transform cardHolder;
     private int cardAmount = 3;
+
+    [SerializeField]
+    private float range;
+    [SerializeField]
+    private LayerMask xpLayer;
+    
 
 
     [SerializeField]
@@ -83,6 +92,17 @@ public class PlayerLeveler : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.L))
         {
             OnLevelUp();
+        }
+
+        MoveXP();
+    }
+
+    private void MoveXP()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range, xpLayer);
+        foreach (var hit in hits)
+        {
+            hit.transform.position = Vector2.MoveTowards(hit.transform.position, this.transform.position, 5 * Time.deltaTime);
         }
     }
 
@@ -190,10 +210,11 @@ public class PlayerLeveler : MonoBehaviour
         curXP += xp;
         if(curXP >= neededXP)
         {            
-            float leftover = neededXP - curXP;
+            float leftover = curXP - neededXP;
             curXP = leftover;
             OnLevelUp();
         }
+        uIManager.UpdateXPSlider(neededXP,curXP);
     }
     private float RollAmount(LevelReward.RewardType type, LevelReward.RewardRarity rarity)
     {

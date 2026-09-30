@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private string enemyName;
+    [SerializeField]
     private float maxHP;
     private float curHP;
     private float damage;
@@ -129,12 +130,12 @@ public class Enemy : MonoBehaviour
         enemyHealthBar.UpdateSlider();
     }
 
-    public void Iniitialize(EnemyData enemyData)
+    public void Iniitialize(EnemyData enemyData, float dm)
     {
         enemyName = enemyData.EnemyName;
-        maxHP = enemyData.MaxHP;
-        curHP = enemyData.MaxHP;
-        damage = enemyData.Damage;
+        maxHP = enemyData.MaxHP * dm;
+        curHP = maxHP;
+        damage = enemyData.Damage* dm;
         speed = enemyData.Speed;
         staggerChance = enemyData.StaggerChance;
         staggerTime = enemyData.StaggerTime;

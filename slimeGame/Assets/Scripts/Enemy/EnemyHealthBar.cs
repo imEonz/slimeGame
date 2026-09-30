@@ -33,7 +33,7 @@ public class EnemyHealthBar : MonoBehaviour
         inactiveTimer = 0;
         if(attatchedEnemy.GetCurHP() > 0) canvasGroup.alpha = 1f;
         else canvasGroup.alpha = 0;
-        healthText.text = $"{attatchedEnemy.GetCurHP()}/{attatchedEnemy.GetMaxHP()}";
+        healthText.text = $"{attatchedEnemy.GetCurHP().ToString("0")}/{attatchedEnemy.GetMaxHP().ToString("0")}";
         hpSlider.value = attatchedEnemy.GetCurHP()/attatchedEnemy.GetMaxHP();
     }
 }

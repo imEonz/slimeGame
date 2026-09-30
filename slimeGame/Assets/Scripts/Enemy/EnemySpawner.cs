@@ -27,11 +27,22 @@ public class EnemySpawner : MonoBehaviour
 
     private Transform player;
 
+    private float time;
+    
+    [SerializeField]
+    private int scaledSpawnAmount;
+
+
+    [SerializeField] 
+    private float doublingTime;
+
+    [SerializeField]
+    public float DifficultyMultiplier => Mathf.Pow(1.5f, time / doublingTime);
+
     void Start()
     {
         player = FindObjectOfType<PlayerController>().transform;
     }
-
 
     void Update()
     {
@@ -47,11 +58,18 @@ public class EnemySpawner : MonoBehaviour
                 spawnTimer += Time.deltaTime;
             }
         }
+        time += Time.deltaTime;
     }
 
     private void SpawnEnemies()
     {
-        for (int i = 0; i < spawnAmount; i++)
+        scaledSpawnAmount = Mathf.CeilToInt(spawnAmount * DifficultyMultiplier);
+        if(scaledSpawnAmount > 250)
+        {
+            scaledSpawnAmount = 250;
+        }
+
+        for (int i = 0; i < scaledSpawnAmount; i++)
         {
             Vector2 spawnPos;
             int attempts = 0;
@@ -66,7 +84,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, enemiesFolder, true);
             EnemyPreSpawn enemyScript = enemy.GetComponent<EnemyPreSpawn>();
             enemyScript.RandomPosition(spawnPos);
-            enemyScript.InitializePreSpawn(spawnableEnemies[Random.Range(0,spawnableEnemies.Count)], em);
+            enemyScript.InitializePreSpawn(spawnableEnemies[Random.Range(0,spawnableEnemies.Count)], em, DifficultyMultiplier);
         }
     }
 }

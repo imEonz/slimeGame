@@ -8,6 +8,7 @@ public class EnemyPreSpawn : MonoBehaviour
 
     private EnemyData enemyData;
     private EnemyManager em;
+    private float dm;
 
 
     void Update()
@@ -20,10 +21,11 @@ public class EnemyPreSpawn : MonoBehaviour
         }
     }
 
-    public void InitializePreSpawn(EnemyData enemyData, EnemyManager em)
+    public void InitializePreSpawn(EnemyData enemyData, EnemyManager em, float dm)
     {
         this.enemyData = enemyData;
         this.em = em;
+        this.dm = dm;
     }
     public void RandomPosition(Vector2 position)
     {
@@ -36,7 +38,7 @@ public class EnemyPreSpawn : MonoBehaviour
         enemy.transform.position = transform.position;
         Enemy enemyScript = enemy.GetComponent<Enemy>();
         enemyScript.em = em;
-        enemyScript.Iniitialize(enemyData);
+        enemyScript.Iniitialize(enemyData, dm);
         em.enemies.Add(enemyScript);
 
         Destroy(this.gameObject);

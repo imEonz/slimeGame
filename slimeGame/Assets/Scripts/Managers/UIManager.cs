@@ -15,14 +15,18 @@ public class UIManager : MonoBehaviour
     private Transform tabCanvas;
     [SerializeField]
     private Transform levelCanvas;
+    [SerializeField]
+    private Transform gameCanvas;
 
     private PlayerController player;
     private PlayerLeveler playerLeveler;
+    private Slider xpSlider;
 
     void Start()
     {
         player = GameObject.FindAnyObjectByType<PlayerController>();
         playerLeveler = FindAnyObjectByType<PlayerLeveler>();
+        xpSlider = gameCanvas.Find("XPSlider").GetComponent<Slider>();
     }
 
     void Update()
@@ -85,4 +89,12 @@ public class UIManager : MonoBehaviour
     {
         if(uIState != UIState.level && uIState != UIState.pause) ActivateTab();
     }
+
+    public void UpdateXPSlider(float maxXp, float curXP)
+    {
+        xpSlider.maxValue = maxXp;
+        xpSlider.value = curXP;
+    }
+
+
 }
