@@ -142,6 +142,8 @@ public class Enemy : MonoBehaviour
         spriteRenderer.sprite = enemyData.EnemySprite;
         timeBetweenCasts = enemyData.TimeBetweenCasts;
 
+        transform.localScale = enemyData.Scale;
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         var template = enemyData.EnemyBehaviour;

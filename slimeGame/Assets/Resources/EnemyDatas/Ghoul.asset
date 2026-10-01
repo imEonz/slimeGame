@@ -19,7 +19,7 @@ MonoBehaviour:
   staggerChance: 0.25
   staggerTime: 1.75
   level: 0
-  sprite: {fileID: 21300000, guid: 550861cd78149f046a51cb27d6418fe3, type: 3}
+  sprite: {fileID: 21300000, guid: 1e85ba55bc211c643894f41042948f22, type: 3}
   lootTable:
   - reward: {fileID: 11400000, guid: 2fd093a278309284d8af72a854a48127, type: 2}
     dropRate: 1
@@ -30,3 +30,4 @@ MonoBehaviour:
   enemyBehaviour: {fileID: 867487023029646664, guid: 2462d78baade6824cb93cc9e9933e674, type: 3}
   enemySkills: []
   timeBetweenCasts: 0
+  scale: {x: 1.75, y: 1.75, z: 1}

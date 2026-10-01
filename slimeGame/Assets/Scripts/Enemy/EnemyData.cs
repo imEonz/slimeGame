@@ -28,6 +28,8 @@ public class EnemyData : ScriptableObject
     private List<EnemySkill> enemySkills = new List<EnemySkill>();
     [SerializeField]
     private float timeBetweenCasts;
+    [SerializeField]
+    private Vector3 scale;
 
 
     public string EnemyName => enemyName;
@@ -37,6 +39,7 @@ public class EnemyData : ScriptableObject
     public float StaggerChance => staggerChance;
     public float StaggerTime => staggerTime;
     public int Level => level;
+    public Vector3 Scale => scale;
     public List<EnemyLoot> LootTable => lootTable;
     public EnemyBehaviour EnemyBehaviour => enemyBehaviour;
     public List<EnemySkill> EnemySkills => enemySkills;
