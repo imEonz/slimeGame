@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour
     private PlayerLeveler playerLeveler;
     private Dictionary<StatType,StatBuffReward> statBuffs = new Dictionary<StatType, StatBuffReward>();
 
+    private bool struggleLeft = true;
+
     void Awake()
     {
         curHP = maxHP;
@@ -106,7 +108,14 @@ public class PlayerController : MonoBehaviour
         if (playerState == State.Consuming && dashInput > 0f)
         {
             consumeMinigame.RegisterDashPress();
+            Struggle();
         }
+    }
+
+    void Struggle()
+    {
+        playerAnimator.Play(struggleLeft ? "struggleLeft" : "struggleRight");
+        struggleLeft = !struggleLeft;
     }
     private void OnMode(InputValue playerInput)
     {
