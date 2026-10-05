@@ -34,7 +34,7 @@ public class ConsumeMinigame : MonoBehaviour
         targetEnemy = enemy;
         onComplete = onCompleteCallback;
         root.gameObject.SetActive(true);
-        progressSlider.value = 0.5f;
+        progressSlider.value = 0.35f;
         DimOtherEnemies();
     }
 
@@ -57,8 +57,9 @@ public class ConsumeMinigame : MonoBehaviour
 
     private void EndConsuming(bool won)
     {   
-        progressSlider.value = 0.5f;
+        progressSlider.value = 0f;
         RestoreEnemies();
+        camera.ZoomIn(0);
 
         Time.timeScale = 1f;
         root.gameObject.SetActive(false);
@@ -73,6 +74,7 @@ public class ConsumeMinigame : MonoBehaviour
     void Update()
     {
         progressSlider.value -= Time.unscaledDeltaTime * consumeFigherScale;
+        camera.ZoomIn(progressSlider.value);
     }
 
     private void DimOtherEnemies()

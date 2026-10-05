@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8b1b3b3a1e5e05241be22f0f61c2cc67
+guid: e7d38185f63d49341aa956bc0d1b47a6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -44,7 +44,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 0
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: slimeMoveUp_0
+      name: SlimeDashLeft_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 941a5cf123860424799f0d2b740c13da
-      internalID: 169210523
+      spriteID: 6d905bc4b6fa75947a8a1963f0243ed5
+      internalID: -58467567
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveUp_1
+      name: SlimeDashLeft_1
       rect:
         serializedVersion: 2
         x: 32
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 242aa33e205c9a740b4eaa2d4fd6719c
-      internalID: -332827940
+      spriteID: ae8ab6f2e6e1f3c4e8553f52dc8064b7
+      internalID: -2089063769
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveUp_2
+      name: SlimeDashLeft_2
       rect:
         serializedVersion: 2
         x: 64
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30fab7a6486fe0548b3c66c4add4b9a7
-      internalID: -2059118935
+      spriteID: b1774755907ef7547b04cb7f4086fdc3
+      internalID: -2125949743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveUp_3
+      name: SlimeDashLeft_3
       rect:
         serializedVersion: 2
         x: 96
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4986a291b36478f44aee22e40afc6fe8
-      internalID: -842415989
+      spriteID: f7f5c2843b47bae4caa94207f4534893
+      internalID: 209660083
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveUp_4
+      name: SlimeDashLeft_4
       rect:
         serializedVersion: 2
         x: 128
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e650cf227bce24d4393e5fc504240c39
-      internalID: 1992060390
+      spriteID: 474a8f3f3b267d544aae91cdb3c45e2d
+      internalID: 1675046840
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveUp_5
+      name: SlimeDashLeft_5
       rect:
         serializedVersion: 2
         x: 160
@@ -216,29 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3070618c350afc14ba24f1562734781c
-      internalID: 1683449713
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: slimeMoveUp_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5070a23ea0046d743a7afd3752b43c47
-      internalID: -1605921447
+      spriteID: 2cd9f9a85e7dccb4a87bae2f44bf4998
+      internalID: -1656701151
       vertices: []
       indices: 
       edges: []
@@ -254,13 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      slimeMoveUp_0: 169210523
-      slimeMoveUp_1: -332827940
-      slimeMoveUp_2: -2059118935
-      slimeMoveUp_3: -842415989
-      slimeMoveUp_4: 1992060390
-      slimeMoveUp_5: 1683449713
-      slimeMoveUp_6: -1605921447
+      SlimeDashLeft_0: -58467567
+      SlimeDashLeft_1: -2089063769
+      SlimeDashLeft_2: -2125949743
+      SlimeDashLeft_3: 209660083
+      SlimeDashLeft_4: 1675046840
+      SlimeDashLeft_5: -1656701151
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

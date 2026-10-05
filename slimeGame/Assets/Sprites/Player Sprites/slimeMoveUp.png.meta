@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0063d3fc7b4e2564792119d6aa7ccc71
+guid: eb8ff7465cbfbf14a892f568b37b0582
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -44,7 +44,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 0
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: slimeMoveRight-Sheet_0
+      name: slimeMoveUp_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a65928b70628224a99ebdf90b66aa87
-      internalID: -1948502477
+      spriteID: bd9e7d8db149c8a4fa29c29694c9219a
+      internalID: 1434089366
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveRight-Sheet_1
+      name: slimeMoveUp_1
       rect:
         serializedVersion: 2
         x: 32
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13cbb94befe86254390f495b2455aa49
-      internalID: -403824410
+      spriteID: f13d3b1185290404aa48dea74a3708c7
+      internalID: 1140925317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveRight-Sheet_2
+      name: slimeMoveUp_2
       rect:
         serializedVersion: 2
         x: 64
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87c812e239c69844c9258b97058f9c6b
-      internalID: -518257625
+      spriteID: 6868a4017e16e334a9a03e0a71af21b5
+      internalID: -281846188
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveRight-Sheet_3
+      name: slimeMoveUp_3
       rect:
         serializedVersion: 2
         x: 96
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b8cda3612835bc429d4912b560a590e
-      internalID: -138343576
+      spriteID: 5626ed39849582b46ba831b6467ed32c
+      internalID: 262203747
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveRight-Sheet_4
+      name: slimeMoveUp_4
       rect:
         serializedVersion: 2
         x: 128
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd93198e25a6767408f18f158bc2cc7e
-      internalID: 1307589659
+      spriteID: a5e5c9aa744b6084b8f8781dbad28d09
+      internalID: -730215495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveRight-Sheet_5
+      name: slimeMoveUp_5
       rect:
         serializedVersion: 2
         x: 160
@@ -216,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b64fed3a569ece42b954c14ba2168c3
-      internalID: 1420880926
+      spriteID: bd73b3fc92dc51f429ef8c24b90cc701
+      internalID: 1170353447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveRight-Sheet_6
+      name: slimeMoveUp_6
       rect:
         serializedVersion: 2
         x: 192
@@ -237,8 +237,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c9b6aa9123e90447af10e837dec410f
-      internalID: 1713891861
+      spriteID: 4e9eba90597efa0428390e15c7397a30
+      internalID: 840225599
       vertices: []
       indices: 
       edges: []
@@ -254,13 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      slimeMoveRight-Sheet_0: -1948502477
-      slimeMoveRight-Sheet_1: -403824410
-      slimeMoveRight-Sheet_2: -518257625
-      slimeMoveRight-Sheet_3: -138343576
-      slimeMoveRight-Sheet_4: 1307589659
-      slimeMoveRight-Sheet_5: 1420880926
-      slimeMoveRight-Sheet_6: 1713891861
+      slimeMoveUp_0: 1434089366
+      slimeMoveUp_1: 1140925317
+      slimeMoveUp_2: -281846188
+      slimeMoveUp_3: 262203747
+      slimeMoveUp_4: -730215495
+      slimeMoveUp_5: 1170353447
+      slimeMoveUp_6: 840225599
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

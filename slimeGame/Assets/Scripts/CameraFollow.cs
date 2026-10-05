@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,9 +24,13 @@ public class CameraFollow : MonoBehaviour
     private Vector3 cursorOffset = Vector3.zero;
     private Vector3 cursorOffsetVelocity = Vector3.zero;
 
+    private float startSize;
+    private float maxZoom = 1.4f;
+
     void Awake()
     {
         cam = Camera.main;
+        startSize = cam.orthographicSize;
     }
 
     private void LateUpdate()
@@ -98,5 +101,11 @@ public class CameraFollow : MonoBehaviour
         }
 
         cursorOffset = Vector3.SmoothDamp(cursorOffset, desiredCursorOffset, ref cursorOffsetVelocity, cursorOffsetSmoothTime, Mathf.Infinity, Time.unscaledDeltaTime);
+    }
+
+    public void ZoomIn(float amount)
+    {
+        float targetSize = startSize / Mathf.Lerp(1f, maxZoom, amount);
+        cam.orthographicSize = targetSize;
     }
 }

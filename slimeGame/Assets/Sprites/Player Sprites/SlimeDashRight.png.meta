@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f30dc3726d1306745b461d2f97929cf8
+guid: cff9e6417aeca4b4eb9ceec51fb0c72d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -44,7 +44,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 0
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: slimeMoveDown_0
+      name: SlimeDashRight_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a27412f6d791ba4e8746e803f1774e7
-      internalID: 1140245736
+      spriteID: 07ff80cb2c84fc44fad8e3306156b33e
+      internalID: -1375246153
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveDown_1
+      name: SlimeDashRight_1
       rect:
         serializedVersion: 2
         x: 32
@@ -132,14 +132,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad669dc5998f362448655b7f1f422f91
-      internalID: -368258306
+      spriteID: 35d2335220d47674d98855992c2eb164
+      internalID: 586668798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveDown_2
+      name: SlimeDashRight_2
       rect:
         serializedVersion: 2
         x: 64
@@ -153,14 +153,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 868322c42dae30e40a87681f88faa8b0
-      internalID: 2098628162
+      spriteID: cc4b07e8c62ba7c4d8b223b935b41c9a
+      internalID: -1191899126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveDown_3
+      name: SlimeDashRight_3
       rect:
         serializedVersion: 2
         x: 96
@@ -174,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22f9bdb3f05a0ff4c82c2e0361770235
-      internalID: 1713019279
+      spriteID: d7b71018adfdefd4ab5f53fba457706e
+      internalID: -997977165
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveDown_4
+      name: SlimeDashRight_4
       rect:
         serializedVersion: 2
         x: 128
@@ -195,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59d88dfd56d77ba4695e2585c0e5cfd1
-      internalID: -992777274
+      spriteID: ccc0a38193dfb60408eb76e6418de00c
+      internalID: 922665529
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: slimeMoveDown_5
+      name: SlimeDashRight_5
       rect:
         serializedVersion: 2
         x: 160
@@ -216,50 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f84d803251c2dae43951e52d10a82840
-      internalID: -526324120
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: slimeMoveDown_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f8a6ef1cdc637c84c8eb68db8ce88d4d
-      internalID: -1924402374
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: slimeMoveDown_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5d93262ca3a4cdf4b910a47b979b6c58
-      internalID: 779614109
+      spriteID: ccc3da84b099887409ce17b47257e7bc
+      internalID: 749155480
       vertices: []
       indices: 
       edges: []
@@ -275,14 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      slimeMoveDown_0: 1140245736
-      slimeMoveDown_1: -368258306
-      slimeMoveDown_2: 2098628162
-      slimeMoveDown_3: 1713019279
-      slimeMoveDown_4: -992777274
-      slimeMoveDown_5: -526324120
-      slimeMoveDown_6: -1924402374
-      slimeMoveDown_7: 779614109
+      SlimeDashRight_0: -1375246153
+      SlimeDashRight_1: 586668798
+      SlimeDashRight_2: -1191899126
+      SlimeDashRight_3: -997977165
+      SlimeDashRight_4: 922665529
+      SlimeDashRight_5: 749155480
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
