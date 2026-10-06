@@ -20,6 +20,7 @@ MonoBehaviour:
   staggerTime: 1.75
   level: 0
   sprite: {fileID: 21300000, guid: 1e85ba55bc211c643894f41042948f22, type: 3}
+  walkAnim: {fileID: 7400000, guid: e772661d4af4943439859232f9be75d2, type: 2}
   lootTable:
   - reward: {fileID: 11400000, guid: 2fd093a278309284d8af72a854a48127, type: 2}
     dropRate: 1

@@ -21,6 +21,8 @@ public class EnemyData : ScriptableObject
     [SerializeField]
     private Sprite sprite;
     [SerializeField]
+    private AnimationClip walkAnim;
+    [SerializeField]
     private List<EnemyLoot> lootTable = new List<EnemyLoot>();
     [SerializeField]
     private EnemyBehaviour enemyBehaviour;
@@ -45,4 +47,5 @@ public class EnemyData : ScriptableObject
     public List<EnemySkill> EnemySkills => enemySkills;
     public float TimeBetweenCasts => timeBetweenCasts;
     public Sprite EnemySprite => sprite;
+    public AnimationClip WalkAnim => walkAnim;
 }
