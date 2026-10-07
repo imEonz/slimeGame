@@ -429,7 +429,8 @@ GameObject:
   - component: {fileID: 4755149223830717463}
   - component: {fileID: 6688542505063714460}
   - component: {fileID: -8954539984011150311}
-  - component: {fileID: -3772195231022318803}
+  - component: {fileID: 4080542205035753952}
+  - component: {fileID: 9065003467690785100}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -479,6 +480,8 @@ MonoBehaviour:
   lootTable: []
   damageNum: {fileID: 6128581707289978850, guid: e24de863a0f0e774aacf2c22786b4657, type: 3}
   xpDrop: {fileID: 3206100424928504368, guid: 14e019e52d4a17f489e4de2c868673d9, type: 3}
+  animator: {fileID: 4080542205035753952}
+  sprite: {fileID: 4651680904155869882}
 --- !u!50 &-8954539984011150311
 Rigidbody2D:
   serializedVersion: 4
@@ -506,8 +509,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &-3772195231022318803
-CircleCollider2D:
+--- !u!95 &4080542205035753952
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4660387846130428271}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 22d87787dc0bb0545872ccc30022f4c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &9065003467690785100
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -521,7 +545,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 5184
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -535,12 +559,22 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &6233388559188078643
 GameObject:
   m_ObjectHideFlags: 0

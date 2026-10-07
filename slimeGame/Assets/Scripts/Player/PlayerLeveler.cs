@@ -147,7 +147,7 @@ public class PlayerLeveler : MonoBehaviour
         {
             GameObject card = Instantiate(cardObject, cardHolder);
             LevelReward random = new LevelReward();
-            random.rewardRarity = rarities[Random.Range(0, rarities.Length)];
+            random.rewardRarity = SetRarity();
             random.rewardType = types[Random.Range(0, types.Length)];
             random.amount = RollAmount(random.rewardType, random.rewardRarity);
             InitializeStrings(random);
@@ -165,6 +165,27 @@ public class PlayerLeveler : MonoBehaviour
                 IsLeveling = false;
             });
 
+        }
+    }
+
+    private LevelReward.RewardRarity SetRarity()
+    {
+        float random = Random.value;
+        if(random > 0.95f)
+        {
+            return LevelReward.RewardRarity.SECRET;
+        }
+        else if(random > 0.8f)
+        {
+            return LevelReward.RewardRarity.LEGENDARY;
+        }
+        else if (random > 0.5f)
+        {
+            return LevelReward.RewardRarity.RARE;
+        }
+        else
+        {
+            return LevelReward.RewardRarity.COMMON;
         }
     }
 

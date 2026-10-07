@@ -9,6 +9,8 @@ public class ChaserBehaviour : EnemyBehaviour
     {
         Vector2 dir = ((Vector2)player.position - (Vector2)enemy.transform.position).normalized;
         Vector2 nextPos = (Vector2)enemy.transform.position + dir * speed * deltaTime;
+
         rb.MovePosition(nextPos);
+        sprite.flipX = dir.x > 0;
     }
 }

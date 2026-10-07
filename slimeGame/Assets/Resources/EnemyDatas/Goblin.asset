@@ -20,6 +20,7 @@ MonoBehaviour:
   staggerTime: 1.75
   level: 0
   sprite: {fileID: 21300000, guid: f8b484db3fbd3ae45af952800f3c9ba9, type: 3}
+  walkAnim: {fileID: 0}
   lootTable:
   - reward: {fileID: 11400000, guid: 2fd093a278309284d8af72a854a48127, type: 2}
     dropRate: 1
@@ -31,4 +32,4 @@ MonoBehaviour:
   enemySkills:
   - {fileID: -783217788336486105, guid: 5d698ef2e0622264196604b875066b73, type: 3}
   timeBetweenCasts: 5
-  scale: {x: 1.2, y: 1.2, z: 1}
+  scale: {x: 1, y: 1, z: 1}

@@ -44,6 +44,10 @@ public class Enemy : MonoBehaviour
     private GameObject damageNum;
     [SerializeField]
     private GameObject xpDrop;
+    [SerializeField]
+    private Animator animator;
+    [SerializeField]
+    public SpriteRenderer sprite;
 
     void Start()
     {
@@ -142,6 +146,8 @@ public class Enemy : MonoBehaviour
         spriteRenderer.sprite = enemyData.EnemySprite;
         timeBetweenCasts = enemyData.TimeBetweenCasts;
 
+
+
         transform.localScale = enemyData.Scale;
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -159,6 +165,27 @@ public class Enemy : MonoBehaviour
             JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(item), enemySkill);
             enemySkill.Initialize(this);
             this.enemySkills.Add(enemySkill);
+        }
+
+        AnimationSwitch(enemyData);
+    }
+
+    private void AnimationSwitch(EnemyData enemyData)
+    {
+        switch (enemyData.EnemyName)
+        {
+            case "Ghoul":
+            animator.Play("ZombieWalk");
+            break;
+            case "Goblin":
+            animator.Play("GoblinWalk");
+            break;
+            case "Healer":
+            animator.Play("PriestWalk");
+            break;
+            case "Wolf":
+            animator.Play("WolfWalk");
+            break;
         }
     }
 

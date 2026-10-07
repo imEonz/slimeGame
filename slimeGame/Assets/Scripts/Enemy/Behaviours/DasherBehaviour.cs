@@ -27,6 +27,7 @@ public class DasherBehaviour : EnemyBehaviour
     {
         float distance = Vector2.Distance(enemy.transform.position, player.position);
         Vector2 dir = ((Vector2)player.position - (Vector2)enemy.transform.position).normalized;
+        
 
         stateTimer += deltaTime;
 
@@ -68,5 +69,6 @@ public class DasherBehaviour : EnemyBehaviour
 
             break;
         }
+        sprite.flipX = dir.x > 0;
     }
 }

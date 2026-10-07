@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocksMovement: 0
-  projectilePrefab: {fileID: 4375833417746700288, guid: 178d3164875435943b511f779e0b2f7b, type: 3}
+  projectilePrefab: {fileID: 4375833417746700288, guid: 1d150a9138effa1418c1c58f2732510f, type: 3}
   damage: 5
   windUp: 0.5

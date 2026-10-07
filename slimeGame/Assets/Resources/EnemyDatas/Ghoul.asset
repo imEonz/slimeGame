@@ -31,4 +31,4 @@ MonoBehaviour:
   enemyBehaviour: {fileID: 867487023029646664, guid: 2462d78baade6824cb93cc9e9933e674, type: 3}
   enemySkills: []
   timeBetweenCasts: 0
-  scale: {x: 1.75, y: 1.75, z: 1}
+  scale: {x: 1, y: 1, z: 1}

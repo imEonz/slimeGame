@@ -26,6 +26,6 @@ public class RangerBehaviour : EnemyBehaviour
             Vector2 nextPos = (Vector2)enemy.transform.position + -dir * speed * deltaTime;
             rb.MovePosition(nextPos);
         }
-
+        sprite.flipX = dir.x > 0;
     }
 }
