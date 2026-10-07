@@ -68,4 +68,9 @@ public class SoundManager : MonoBehaviour
         Debug.LogWarning("Didn't find shit");
         return null;
     }
+
+    public void ButtonPlaySFX(string audioClip)
+    {
+        PlaySoundFXClip(GetAudioClip(audioClip), this.transform, 0.2f);
+    }
 }
