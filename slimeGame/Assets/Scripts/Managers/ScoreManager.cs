@@ -112,8 +112,9 @@ public class ScoreManager : MonoBehaviour
             GameManager.Instance.SaveScore(data);
 
             SceneManager.LoadScene(1);
+            Time.timeScale = 1f;
         });
-        exitButton.onClick.AddListener(()=> SceneManager.LoadScene(1));
+        exitButton.onClick.AddListener(()=> {SceneManager.LoadScene(1); Time.timeScale = 1f;});
     }
 
     private bool IsValidName(string name)
