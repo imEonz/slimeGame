@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
     {
         public List<ScoreData> scores = new List<ScoreData>();
     }
+
+    private Coroutine sceneCoroutine;
 
     private void Awake()
     {
@@ -60,5 +63,22 @@ public class GameManager : MonoBehaviour
         string json = File.ReadAllText(SavePath);
         ScoreDataList list = JsonUtility.FromJson<ScoreDataList>(json);
         return list ?? new ScoreDataList();
+    }
+
+    public void ButtonChangeScene(int scenenum)
+    {
+        if(sceneCoroutine != null) return;
+        sceneCoroutine = StartCoroutine(ChangeSceneCoroutine(scenenum));
+    }
+
+    private IEnumerator ChangeSceneCoroutine(int scenenum)
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(scenenum);
+    }
+    public void ButtonQuitGame()
+    {
+        Debug.Log("Quitting game...");
+        Application.Quit();
     }
 }

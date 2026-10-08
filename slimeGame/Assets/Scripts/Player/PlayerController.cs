@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private State playerState;
 
     [SerializeField]
-    PlayerHealthBar playerHealthBar;
+    NewPlayerHealthBar playerHealthBar;
     [SerializeField]
     private float consumeIframes = 0.5f;
     private float consumeTimer;
