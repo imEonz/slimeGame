@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private State playerState;
 
     [SerializeField]
-    NewPlayerHealthBar playerHealthBar;
+    private List<NewPlayerHealthBar> playerHealthBars;
     [SerializeField]
     private float consumeIframes = 0.5f;
     private float consumeTimer;
@@ -288,7 +288,10 @@ public class PlayerController : MonoBehaviour
             curHP = 0;
             PlayerDied();
         }
-        playerHealthBar.UpdatePlayerHPBar();
+        foreach (var bar in playerHealthBars)
+        {
+            bar.UpdatePlayerHPBar();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -350,6 +353,7 @@ public class PlayerController : MonoBehaviour
         }
         attachedEnemy.enemyState = Enemy.State.Dead;
         ScoreManager.Instance.AddScore("Consume",300);
+        TriggerBus.Fire(new TriggerContext(TriggerType.OnConsume, transform.position, amount: 1));
         
         attachedEnemy = null;
         isDashing = false;
@@ -392,10 +396,14 @@ public class PlayerController : MonoBehaviour
     public void HealDamage(float percentage)
     {
         float healAmount = maxHP * percentage;
+        TriggerBus.Fire(new TriggerContext(TriggerType.OnHeal, transform.position, amount: healAmount));
 
         curHP += healAmount;
         if (curHP > maxHP) curHP = maxHP;
-        playerHealthBar.UpdatePlayerHPBar();
+        foreach (var bar in playerHealthBars)
+        {
+            bar.UpdatePlayerHPBar();
+        }
     }
 
     public void ApplyStatBuff(StatBuffReward reward)
@@ -423,12 +431,19 @@ public class PlayerController : MonoBehaviour
         dashSpeed    = buffedDash  * playerLeveler.GetSPDMult();
         dashCooldown = buffedCooldown;
 
-        playerHealthBar.UpdatePlayerHPBar();
+        foreach (var bar in playerHealthBars)
+        {
+            bar.UpdatePlayerHPBar();
+        }
     }
 
     public State GetPlayerState()
     {
         return playerState;
+    }
+    public float GetPlayerSPD()
+    {
+        return curSpeed;
     }
 
     private void PlayerDied()

@@ -225,10 +225,12 @@ public class PlayerLeveler : MonoBehaviour
 
         InitializeCards();
         uIManager.ActivateLevel();
+        uIManager.LeveledUp();
     }
     public void AddXP(float xp)
     {
         curXP += xp;
+        TriggerBus.Fire(new TriggerContext(TriggerType.OnXpGrabbed, player.transform.position, amount: xp));
         if(curXP >= neededXP)
         {            
             float leftover = curXP - neededXP;
@@ -283,5 +285,9 @@ public class PlayerLeveler : MonoBehaviour
     public float GetFirerateMult()
     {
         return firerateMult;
+    }
+    public int GetLevel()
+    {
+        return level;
     }
 }

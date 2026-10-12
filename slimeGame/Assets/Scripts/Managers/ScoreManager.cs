@@ -32,6 +32,8 @@ public class ScoreManager : MonoBehaviour
     private TMP_Text errorText;
     [SerializeField]
     private TMP_Text endScore;
+    [SerializeField]
+    private TMP_Text pauseScore;
 
 
 
@@ -85,6 +87,7 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = "Score: " + score.ToString("0");
         endScore.text = "Score: " + score.ToString("0");
+        pauseScore.text= "Score: " + score.ToString("0");
     }
 
     public float GetScore()

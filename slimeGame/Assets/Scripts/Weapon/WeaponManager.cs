@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -146,5 +147,10 @@ public class WeaponManager : MonoBehaviour
             if (count > 0) controller.SetShootCount(count);
             if (range > 0) controller.SetRange(range);
         }
+    }
+
+    public List<ActiveWeapon> GetWeaponList()
+    {
+        return activeWeapons;
     }
 }

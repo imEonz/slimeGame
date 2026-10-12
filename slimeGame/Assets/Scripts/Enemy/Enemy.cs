@@ -71,6 +71,7 @@ public class Enemy : MonoBehaviour
         else if (enemyState == State.Dead)
         {
             em.enemies.Remove(this);
+            TriggerBus.Fire(new TriggerContext(TriggerType.OnKill, transform.position, this));
             Instantiate(xpDrop, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
@@ -117,6 +118,7 @@ public class Enemy : MonoBehaviour
         Destroy(number,0.5f);
 
         curHP -= damage;
+        TriggerBus.Fire(new TriggerContext(TriggerType.OnHit, this.transform.position, this, damage: damage));
         if(curHP <= 0)
         {
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
@@ -199,6 +201,7 @@ public class Enemy : MonoBehaviour
         if(staggerTimer > staggerTime)
         {
             enemyState = State.Dead;
+            TriggerBus.Fire(new(TriggerType.OnMissConsume, this.transform.position, this));
             ScoreManager.Instance.AddScore("Kill",100);
         } 
     }

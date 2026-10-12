@@ -5,10 +5,10 @@ using UnityEngine;
 public enum TriggerType
 {
     OnConsume, OnDash, OnKill, OnHit, OnPierce,
-    OnDeath, OnPlayerHit, OnXpGrabbed, OnLevelUp
+    OnDeath, OnPlayerHit, OnXpGrabbed, OnLevelUp, OnHeal, OnMissConsume
 }
 
-public class TriggerContext : MonoBehaviour
+public class TriggerContext
 {
     public TriggerType type;
     public Transform player;
@@ -17,4 +17,16 @@ public class TriggerContext : MonoBehaviour
     public float damage; 
     public float amount;
     public int depth;
+
+    public TriggerContext(TriggerType type, Vector2 position, Enemy enemy = null,
+    float damage = 0f, float amount = 0f, int depth = 0)
+    {
+        this.type = type;
+        this.position = position;
+        this.enemy = enemy;
+        this.damage = damage;
+        this.amount = amount;
+        this.depth = depth;
+        this.player = null;
+    }
 }
