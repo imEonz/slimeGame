@@ -111,6 +111,7 @@ public class UIManager : MonoBehaviour
         if(!levelCanvas.gameObject.activeSelf)
         {
             levelCanvas.gameObject.SetActive(true);
+            levelCanvas.GetComponent<Animator>().Play("OnLevelUp");
             Time.timeScale = 0f;
             uIState = UIState.level;
         }

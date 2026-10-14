@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -48,6 +49,10 @@ public class Enemy : MonoBehaviour, IDamagable
     private Animator animator;
     [SerializeField]
     public SpriteRenderer sprite;
+
+    private bool isFlashing = false;
+    private Coroutine hitFlashCoroutine;
+    private float hitFlashDuration = 0.15f;
 
     void Start()
     {
@@ -112,6 +117,8 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         // float newDamage = damage * em.dmgMult;
 
+        if(enemyState == State.Dead || enemyState == State.Stagger) return;
+
         GameObject number = Instantiate(damageNum);
         number.transform.Find("Text").GetComponent<TMP_Text>().text = "-" + damage.ToString("0");
         number.transform.position = this.transform.position;
@@ -119,6 +126,11 @@ public class Enemy : MonoBehaviour, IDamagable
 
         curHP -= damage;
         TriggerBus.Fire(new TriggerContext(TriggerType.OnHit, this.transform.position, this, damage: damage));
+        SoundManager.Instance.PlaySoundFXClipRandomPitch(SoundManager.Instance.GetAudioClip("bleed"), SoundManager.Instance.transform, 0.05f);
+
+        if (hitFlashCoroutine != null) StopCoroutine(hitFlashCoroutine);
+        hitFlashCoroutine = StartCoroutine(HitFlash());
+
         if(curHP <= 0)
         {
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
@@ -132,6 +144,11 @@ public class Enemy : MonoBehaviour, IDamagable
     private void Heal(float healing)
     {
         curHP = Mathf.Min(curHP + healing, maxHP);
+        GameObject number = Instantiate(damageNum);
+        number.transform.Find("Text").GetComponent<TMP_Text>().color = Color.green;
+        number.transform.Find("Text").GetComponent<TMP_Text>().text = "-" + healing.ToString("0");
+        number.transform.position = this.transform.position;
+        Destroy(number,0.5f);
         enemyHealthBar.UpdateSlider();
     }
 
@@ -202,7 +219,7 @@ public class Enemy : MonoBehaviour, IDamagable
         staggerTimer += Time.deltaTime;
 
         float t = Mathf.PingPong(staggerTimer * flashSpeed, 1f);
-        spriteRenderer.color = Color.Lerp(originalColor, Color.white, t);
+        spriteRenderer.color = Color.Lerp(originalColor, Color.red, t);
 
         if(staggerTimer > staggerTime)
         {
@@ -217,6 +234,16 @@ public class Enemy : MonoBehaviour, IDamagable
         Color c = spriteRenderer.color;
         c.a = opacity;
         spriteRenderer.color = c;
+    }
+
+    private IEnumerator HitFlash()
+    {
+        isFlashing = true;
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(hitFlashDuration);
+        spriteRenderer.color = originalColor;
+        isFlashing = false;
+        hitFlashCoroutine = null;
     }
 
     public List<EnemyLoot> GetEnemyLoot()

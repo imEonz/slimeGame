@@ -95,6 +95,11 @@ public class PlayerController : MonoBehaviour, IDamagable
         playerLeveler = FindAnyObjectByType<PlayerLeveler>();
 
         RecalculateStats();
+
+        foreach (var item in playerHealthBars)
+        {
+            item.Init();
+        }
     }
     public void OnMove(InputValue playerInput)
     {
@@ -401,6 +406,12 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         curHP += healAmount;
         if (curHP > maxHP) curHP = maxHP;
+
+        GameObject number = Instantiate(damageNum);
+        number.transform.Find("Text").GetComponent<TMP_Text>().color = Color.green;
+        number.transform.Find("Text").GetComponent<TMP_Text>().text = "-" + healAmount.ToString("0");
+        number.transform.position = this.transform.position;
+        Destroy(number,0.5f);
         foreach (var bar in playerHealthBars)
         {
             bar.UpdatePlayerHPBar();

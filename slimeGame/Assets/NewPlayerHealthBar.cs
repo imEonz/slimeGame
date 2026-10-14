@@ -28,6 +28,15 @@ public class NewPlayerHealthBar : MonoBehaviour
         UpdatePlayerHPBar();
     }
 
+    public void Init()
+    {
+        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        hpSlider.fillAmount = 1;
+        hpText.text = $"{pc.GetPlayerHP().ToString("0")}";
+
+        UpdatePlayerHPBar();
+    }
+
     public void UpdatePlayerHPBar()
     {
         hpSlider.fillAmount = pc.GetPlayerHP()/pc.GetPlayerMaxHP();

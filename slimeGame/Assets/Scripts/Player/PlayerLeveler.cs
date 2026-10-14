@@ -63,6 +63,10 @@ public class PlayerLeveler : MonoBehaviour
     [SerializeField]
     private float firerateMult = 1f;
 
+
+    [SerializeField]
+    private List<Sprite> icons;
+
     void Start()
     {
         player = GameObject.FindAnyObjectByType<PlayerController>();
@@ -212,7 +216,21 @@ public class PlayerLeveler : MonoBehaviour
         itemDesc.text = levelReward.desc;
         itemAmount.text = $"{levelReward.amount * 100}%";
         itemRarity.text = levelReward.rewardRarity.ToString();
+        card.transform.Find("Icon").GetComponent<Image>().sprite = GetCardIcon(levelReward.rewardType.ToString());
 
+    }
+
+    private Sprite GetCardIcon(string name)
+    {
+        foreach (Sprite icon in icons)
+        {
+            if(icon.name == name)
+            {
+                return icon;
+            }
+        }
+        Debug.LogWarning("Didn't find shit");
+        return null;
     }
 
     private void OnLevelUp()
@@ -231,6 +249,8 @@ public class PlayerLeveler : MonoBehaviour
     {
         curXP += xp;
         TriggerBus.Fire(new TriggerContext(TriggerType.OnXpGrabbed, player.transform.position, amount: xp));
+        SoundManager.Instance.PlaySoundFXClipRandomPitch(SoundManager.Instance.GetAudioClip("pickUp"), this.transform, 0.1f);
+
         if(curXP >= neededXP)
         {            
             float leftover = curXP - neededXP;
