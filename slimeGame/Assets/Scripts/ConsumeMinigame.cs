@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,6 +41,7 @@ public class ConsumeMinigame : MonoBehaviour
         if (!root.activeSelf) return;
 
         progressSlider.value += dashAmount;
+        SoundManager.Instance.PlaySoundFXClip(SoundManager.Instance.GetAudioClip("slimeStruggle"),transform,0.1f, UnityEngine.Random.Range(0.95f,1f));
         camera.Shake();
 
         if (progressSlider.value >= 1f)

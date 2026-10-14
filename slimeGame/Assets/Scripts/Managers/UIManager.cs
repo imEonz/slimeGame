@@ -1,6 +1,7 @@
 
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -62,6 +63,14 @@ public class UIManager : MonoBehaviour
             else if (child.name == "Sword") { swordEntry = child; swordPanel = child.Find("Panel"); }
             else if (child.name == "Arrow") { arrowEntry = child; arrowPanel = child.Find("Panel"); }
         }
+
+        pauseCanvas.Find("PausePanel/Continue").GetComponent<Button>().onClick.AddListener(()=>{
+            ActivatePause();
+        });
+        pauseCanvas.Find("PausePanel/Quit").GetComponent<Button>().onClick.AddListener(()=>{
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(1);
+        });
     }
     void OnDestroy()
     {

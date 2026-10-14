@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
@@ -6,6 +7,16 @@ public class SoundManager : MonoBehaviour
     private AudioSource SoundFXObject;
     [SerializeField] 
     private AudioClip[] audioClips;
+    [SerializeField] private int poolSize = 32;
+    [SerializeField] private float minTimeBetweenSameClip = 0.05f;
+    [SerializeField] private int maxSimultaneousSameClip = 4;
+
+
+    private AudioSource[] pool;
+    private int nextIndex;
+    private Dictionary<string, AudioClip> clipLookup;
+    private Dictionary<AudioClip, float> lastPlayTime = new();
+    private Dictionary<AudioClip, int> activeCount = new();
 
     void Awake()
     {
@@ -15,62 +26,72 @@ public class SoundManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+        clipLookup = new Dictionary<string, AudioClip>();
+        foreach (var clip in audioClips) if (clip != null) clipLookup[clip.name] = clip;
+
+        pool = new AudioSource[poolSize];
+        for (int i = 0; i < poolSize; i++)
+        {
+            pool[i] = Instantiate(SoundFXObject, transform);
+            pool[i].playOnAwake = false;
+        }
     }
 
-    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, float? pitch = null)
+    public void PlaySoundFXClip(AudioClip clip, Transform spawnTransform, float volume, float? pitch = null)
     {
-        if(audioClip == null) return;
-        AudioSource audioSource = Instantiate(SoundFXObject, spawnTransform.transform);
-    
-        audioSource.clip = audioClip;
-
-        audioSource.volume = volume;
-
-        if(pitch != null) audioSource.pitch = (float)pitch;
-
-        audioSource.Play();
-
-        float clipLength = audioSource.clip.length;
-
-        Destroy(audioSource.gameObject, clipLength);
+        Vector3 pos = spawnTransform != null ? spawnTransform.position : transform.position;
+        Play(clip, pos, volume, pitch ?? 1f);
     }
-    public void PlaySoundFXClipRandomPitch(AudioClip audioClip, Transform spawnTransform, float volume)
+
+    public void PlaySoundFXClipRandomPitch(AudioClip clip, Transform spawnTransform, float volume)
     {
-        if(audioClip == null) return;
-        AudioSource audioSource = Instantiate(SoundFXObject, spawnTransform.transform);
-    
-        audioSource.clip = audioClip;
-
-        audioSource.volume = volume;
-
-        audioSource.pitch = Random.Range(0.8f,1.2f);;
-
-        audioSource.Play();
-
-        float clipLength = audioSource.clip.length;
-
-        Destroy(audioSource.gameObject, clipLength);
+        Vector3 pos = spawnTransform != null ? spawnTransform.position : transform.position;
+        Play(clip, pos, volume, Random.Range(0.8f, 1.2f));
     }
-    public float GetClipLength(AudioClip clip)
+
+    private void Play(AudioClip clip, Vector3 position, float volume, float pitch)
     {
-        return clip.length;
+        if (clip == null) return;
+
+        if (lastPlayTime.TryGetValue(clip, out float last) && Time.unscaledTime - last < minTimeBetweenSameClip) return;
+
+        activeCount.TryGetValue(clip, out int count);
+        if (count >= maxSimultaneousSameClip) return;
+
+        lastPlayTime[clip] = Time.unscaledTime;
+
+        AudioSource source = pool[nextIndex];
+        nextIndex = (nextIndex + 1) % pool.Length;
+
+        source.Stop();
+        source.transform.position = position;
+        source.clip = clip;
+        source.volume = volume;
+        source.pitch = pitch;
+        source.Play();
+
+        activeCount[clip] = count + 1;
+        StartCoroutine(ReleaseAfter(clip, clip.length / Mathf.Abs(pitch)));
     }
+
+    private System.Collections.IEnumerator ReleaseAfter(AudioClip clip, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        if (activeCount.TryGetValue(clip, out int c)) activeCount[clip] = Mathf.Max(0, c - 1);
+    }
+
+    public float GetClipLength(AudioClip clip) => clip.length;
 
     public AudioClip GetAudioClip(string clipToPlay)
     {
-        foreach (AudioClip clip in audioClips)
-        {
-            if(clip.name == clipToPlay)
-            {
-                return clip;
-            }
-        }
-        Debug.LogWarning("Didn't find shit");
+        if (clipLookup.TryGetValue(clipToPlay, out var clip)) return clip;
+        Debug.LogWarning($"Audio clip '{clipToPlay}' not found");
         return null;
     }
 
     public void ButtonPlaySFX(string audioClip)
     {
-        PlaySoundFXClip(GetAudioClip(audioClip), this.transform, 0.2f);
+        PlaySoundFXClip(GetAudioClip(audioClip), transform, 0.2f);
     }
 }

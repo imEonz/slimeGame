@@ -85,6 +85,11 @@ public class PlayerController : MonoBehaviour, IDamagable
     void Awake()
     {
         curHP = maxHP;
+
+        foreach (var item in playerHealthBars)
+        {
+            item.Init(this);
+        }
     }
     void Start()
     {
@@ -95,11 +100,6 @@ public class PlayerController : MonoBehaviour, IDamagable
         playerLeveler = FindAnyObjectByType<PlayerLeveler>();
 
         RecalculateStats();
-
-        foreach (var item in playerHealthBars)
-        {
-            item.Init();
-        }
     }
     public void OnMove(InputValue playerInput)
     {
@@ -167,6 +167,8 @@ public class PlayerController : MonoBehaviour, IDamagable
 
                 if (dashDir == Direction.Left) dashClip = "dashLeft";
                 else if (dashDir == Direction.Right) dashClip = "dashRight";
+
+                SoundManager.Instance.PlaySoundFXClip(SoundManager.Instance.GetAudioClip("Dash"),transform,0.3f, UnityEngine.Random.Range(0.98f,1.02f));
 
                 if (dashClip != null)
                 {

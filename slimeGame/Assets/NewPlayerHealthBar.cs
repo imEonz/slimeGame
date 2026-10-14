@@ -19,18 +19,18 @@ public class NewPlayerHealthBar : MonoBehaviour
     private float beatTimer;
     private float timer;
     private Coroutine heartRoutine;
-    void Start()
-    {
-        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        hpSlider.fillAmount = 1;
-        hpText.text = $"{pc.GetPlayerHP().ToString("0")}";
+    // void Start()
+    // {
+    //     pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    //     hpSlider.fillAmount = 1;
+    //     hpText.text = $"{pc.GetPlayerHP().ToString("0")}";
 
-        UpdatePlayerHPBar();
-    }
+    //     UpdatePlayerHPBar();
+    // }
 
-    public void Init()
+    public void Init(PlayerController player)
     {
-        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        pc = player;
         hpSlider.fillAmount = 1;
         hpText.text = $"{pc.GetPlayerHP().ToString("0")}";
 

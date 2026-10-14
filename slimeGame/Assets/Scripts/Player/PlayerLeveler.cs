@@ -241,6 +241,8 @@ public class PlayerLeveler : MonoBehaviour
         level++;
         neededXP = neededXP * 1.2f;
 
+        SoundManager.Instance.PlaySoundFXClip(SoundManager.Instance.GetAudioClip("LevelUp"),transform,1.4f, Random.Range(0.98f,1.02f));
+
         InitializeCards();
         uIManager.ActivateLevel();
         uIManager.LeveledUp();

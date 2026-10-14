@@ -59,7 +59,11 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        timeText.text = time.ToString("0");
+
+        int minutes = Mathf.FloorToInt(time / 60f);
+        int seconds = Mathf.FloorToInt(time % 60f);
+
+        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
         score += Time.deltaTime * 5f;
         UpdateScore();
