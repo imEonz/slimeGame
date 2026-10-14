@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamagable
 {
     [SerializeField] private float baseMaxHP = 160f;
     [SerializeField] private float baseMoveSpeed = 5f;
@@ -273,6 +273,7 @@ public class PlayerController : MonoBehaviour
         curHP -= damage;
 
         SoundManager.Instance.PlaySoundFXClipRandomPitch(SoundManager.Instance.GetAudioClip("Hit"),this.transform,1f);
+        TriggerBus.Fire(new TriggerContext(TriggerType.OnPlayerHit, transform.position, damage: damage));
 
         GameObject number = Instantiate(damageNum);
         number.transform.Find("Text").GetComponent<TMP_Text>().text = "-" + damage.ToString("0");

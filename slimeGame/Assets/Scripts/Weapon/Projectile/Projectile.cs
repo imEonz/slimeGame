@@ -44,8 +44,8 @@ public class Projectile : MonoBehaviour
         if (collision.tag == "Map") Destroy(gameObject);
         if (hitTargets.Contains(collision)) return;
 
-        Enemy enemy = collision.GetComponent<Enemy>();
-        if (enemy == null || enemy.enemyState != Enemy.State.Alive) return;
+        IDamagable enemy = collision.GetComponent<IDamagable>();
+        // if (enemy == null || enemy.enemyState != Enemy.State.Alive) return;
 
         hitTargets.Add(collision);
         OnHit(enemy);
@@ -54,7 +54,7 @@ public class Projectile : MonoBehaviour
         if(pierceCount <= 0) Destroy(gameObject);
     }
 
-    protected virtual void OnHit(Enemy enemy)
+    protected virtual void OnHit(IDamagable enemy)
     {
         ScoreManager.Instance.AddScore("Hit",20);
         if(hitTargets.Count != 1) ScoreManager.Instance.AddScore("Pierce",40);

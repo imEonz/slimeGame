@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamagable
 {
     private string enemyName;
     [SerializeField]
@@ -128,10 +128,16 @@ public class Enemy : MonoBehaviour
         }
         enemyHealthBar.UpdateSlider();
     }
-    public void Heal(float healing)
+
+    private void Heal(float healing)
     {
         curHP = Mathf.Min(curHP + healing, maxHP);
         enemyHealthBar.UpdateSlider();
+    }
+
+    public void HealDamage(float percentage)
+    {
+        Heal(maxHP * percentage);
     }
 
     public void Iniitialize(EnemyData enemyData, float dm)

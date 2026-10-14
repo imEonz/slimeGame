@@ -33,7 +33,7 @@ class HealSkill : EnemySkill
         foreach (var hit in hits)
         {
             Enemy other = hit.GetComponent<Enemy>();
-            if (other != null && other.enemyState == Enemy.State.Alive) other.Heal(healing);
+            if (other != null && other.enemyState == Enemy.State.Alive) other.HealDamage(healing);
         }
     }
 }
