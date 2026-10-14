@@ -23,11 +23,11 @@ public class FollowCursor : MonoBehaviour
     {
         if(player.AutoAim) image.sprite = auto;
         else image.sprite = aiming;
-        
+
         Camera cam = canvas.worldCamera != null ? canvas.worldCamera : Camera.main;
 
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(
-                (RectTransform)rect.parent, Input.mousePosition, cam, out Vector3 worldPoint))
+        (RectTransform)rect.parent, Input.mousePosition, cam, out Vector3 worldPoint))
         {
             rect.position = worldPoint;
         }
