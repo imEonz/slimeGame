@@ -46,6 +46,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text healedText;
     [SerializeField] private TMP_Text missedText;
 
+    [SerializeField] private TMP_Text skillNameText;
+    [SerializeField] private TMP_Text skillDescText;
+    [SerializeField] private TMP_Text skillXpText;
+    [SerializeField] private Slider skillXpSlider;
+    [SerializeField] private GameObject skillButton;
+
+    private SkillManager skillManager;
+
     void Start()
     {
         stats = StatTracker.Instance;
@@ -56,6 +64,7 @@ public class UIManager : MonoBehaviour
         playerLeveler = FindAnyObjectByType<PlayerLeveler>();
         weaponManager = FindAnyObjectByType<WeaponManager>();
         xpSlider = gameCanvas.Find("XPSlider").GetComponent<Slider>();
+        skillManager = FindAnyObjectByType<SkillManager>();
 
         foreach (Transform child in weaponHolder)
         {
@@ -104,6 +113,7 @@ public class UIManager : MonoBehaviour
         {
             UpdateTabMenu();
             UpdateStatsPanel();
+            UpdateSkillInventory();
             tabCanvas.gameObject.SetActive(true);
             Time.timeScale = 0f;
             uIState = UIState.tab;
@@ -148,6 +158,43 @@ public class UIManager : MonoBehaviour
 
         xpTabSlider.maxValue = maxXp;
         xpTabSlider.value = curXP;
+    }
+
+    private void ShowSkillDetails(RewardInstance reward)
+    {
+        skillNameText.text = reward.data.RewardName;
+        skillDescText.text = reward.data.Bio;
+        skillXpText.text = $"{reward.experience}/{reward.curLevel+1}";
+        skillXpSlider.maxValue = reward.curLevel+1;
+        skillXpSlider.value = reward.experience;
+    }
+    private void UpdateSkillInventory()
+    {
+        foreach (Transform child in skillHolder) Destroy(child.gameObject);
+
+        var rewards = skillManager.GetRewardInstances();
+
+        foreach (var reward in rewards)
+        {
+            GameObject btn = Instantiate(skillButton, skillHolder);
+
+            btn.transform.Find("Icon").GetComponentInChildren<Image>().sprite = reward.data.Icon;
+            btn.transform.Find("Slider").GetComponentInChildren<Slider>().maxValue = reward.curLevel+1;
+            btn.transform.Find("Slider").GetComponentInChildren<Slider>().value = reward.experience;
+
+            btn.GetComponent<Button>().onClick.AddListener(() => ShowSkillDetails(reward));
+        }
+
+        if (rewards.Count > 0) ShowSkillDetails(rewards[0]);
+        else ClearSkillDetails();
+    }
+
+    private void ClearSkillDetails()
+    {
+        skillNameText.text = "";
+        skillDescText.text = "";
+        skillXpText.text = "";
+        skillXpSlider.value = 0;
     }
 
 

@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77134ded0dbadcc488d0b0a9caf0bc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  range: 10
-  dashTime: 5
-  dashCooldown: 5
-  dashSpeed: 10
-  dashWindup: 1.5
+  speed: 6
+  range: 15
+  dashTime: 1
+  dashCooldown: 7.5
+  dashSpeed: 15
+  dashWindup: 1
   dashAmount: 1

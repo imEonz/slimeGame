@@ -47,7 +47,7 @@ public class Arrow : Projectile
             yield return null;
         }
         arrowState = ArrowState.Fired;
-        SoundManager.Instance.PlaySoundFXClip(SoundManager.Instance.GetAudioClip("Arrow"),this.transform,0.08f);
+        SoundManager.Instance.PlaySoundFXClip(SoundManager.Instance.GetAudioClip("Arrow"),this.transform,0.08f, UnityEngine.Random.Range(0.98f,1.02f));
 
     }
 

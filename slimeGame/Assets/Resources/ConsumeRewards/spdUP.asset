@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: spdUP
   m_EditorClassIdentifier: 
   rewardName: SPD UP
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 7c07e4f91f8e45046ac6122ca50a38bf, type: 3}
   maxLevel: 5
   curLevel: 1
+  bio: Increases your base speed.
   statType: 2
   scaling:
   - 1.05

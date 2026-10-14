@@ -389,6 +389,10 @@ public class PlayerController : MonoBehaviour, IDamagable
                 {
                     weaponManager.PickupWeapon(weaponReward);
                 }
+                else if (item.reward is SkillReward skillReward)
+                {
+                    skillManager.AddSkill(skillReward);
+                }
             }
         }
     }

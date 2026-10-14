@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64680103ca51b9a49b4824146149e441, type: 3}
+  m_Name: LifestealReward
+  m_EditorClassIdentifier: 
+  rewardName: Lifesteal
+  icon: {fileID: 21300000, guid: 4a08dd1e3f4cf5a4ca1034220f237400, type: 3}
+  maxLevel: 5
+  curLevel: 1
+  bio: Stolen from the wolves, your attacks now draw in life from your foes.
+  skill: {fileID: 11400000, guid: 8184cba821ebf1141ab605f6ca137cb1, type: 2}
