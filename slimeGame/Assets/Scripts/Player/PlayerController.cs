@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SocialPlatforms;
 
 public class PlayerController : MonoBehaviour, IDamagable
 {
@@ -63,7 +61,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     private UIManager uIManager;
 
-    CameraFollow camera;
+    CameraFollow cameraFollow;
     [SerializeField]
     private Transform gameOverPanel;
 
@@ -95,7 +93,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     void Start()
     {
         originalColor = spriteRenderer.color;
-        camera = Camera.main.GetComponent<CameraFollow>();
+        cameraFollow = Camera.main.GetComponent<CameraFollow>();
 
         uIManager = GameObject.FindAnyObjectByType<UIManager>();
         playerLeveler = FindAnyObjectByType<PlayerLeveler>();
@@ -291,7 +289,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         if (hitFlashCoroutine != null) StopCoroutine(hitFlashCoroutine);
         hitFlashCoroutine = StartCoroutine(HitFlash());
 
-        camera.Shake();
+        cameraFollow.Shake();
         if(curHP <= 0)
         {
             curHP = 0;

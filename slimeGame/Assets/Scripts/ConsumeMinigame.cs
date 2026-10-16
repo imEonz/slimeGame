@@ -17,7 +17,7 @@ public class ConsumeMinigame : MonoBehaviour
     [SerializeField]
     EnemyManager enemyManager;
     [SerializeField]
-    CameraFollow camera;
+    CameraFollow cameraFollow;
     Enemy targetEnemy;
     private Action<bool> onComplete;
 
@@ -42,7 +42,7 @@ public class ConsumeMinigame : MonoBehaviour
 
         progressSlider.value += dashAmount;
         SoundManager.Instance.PlaySoundFXClip(SoundManager.Instance.GetAudioClip("slimeStruggle"),transform,0.1f, UnityEngine.Random.Range(0.95f,1f));
-        camera.Shake();
+        cameraFollow.Shake();
 
         if (progressSlider.value >= 1f)
         {
@@ -58,7 +58,7 @@ public class ConsumeMinigame : MonoBehaviour
     {   
         progressSlider.value = 0f;
         RestoreEnemies();
-        camera.ZoomIn(0);
+        cameraFollow.ZoomIn(0);
 
         Time.timeScale = 1f;
         root.gameObject.SetActive(false);
@@ -73,7 +73,7 @@ public class ConsumeMinigame : MonoBehaviour
     void Update()
     {
         progressSlider.value -= Time.unscaledDeltaTime * consumeFigherScale;
-        camera.ZoomIn(progressSlider.value);
+        cameraFollow.ZoomIn(progressSlider.value);
     }
 
     private void DimOtherEnemies()

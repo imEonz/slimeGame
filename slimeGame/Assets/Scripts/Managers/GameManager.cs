@@ -67,14 +67,18 @@ public class GameManager : MonoBehaviour
 
     public void ButtonChangeScene(int scenenum)
     {
+        Debug.Log("trying to change scene");
         if(sceneCoroutine != null) return;
         sceneCoroutine = StartCoroutine(ChangeSceneCoroutine(scenenum));
+        Debug.Log("made it here");
     }
 
     private IEnumerator ChangeSceneCoroutine(int scenenum)
     {
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(scenenum);
+        sceneCoroutine = null;
+        Debug.Log("Should be here");
     }
     public void ButtonQuitGame()
     {

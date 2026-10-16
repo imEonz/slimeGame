@@ -1,4 +1,3 @@
-using Unity;
 using UnityEngine;
 public class AnimationSound : MonoBehaviour
 {

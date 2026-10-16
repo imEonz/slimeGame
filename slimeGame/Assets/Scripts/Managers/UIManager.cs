@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour
         });
         pauseCanvas.Find("PausePanel/Quit").GetComponent<Button>().onClick.AddListener(()=>{
             Time.timeScale = 1f;
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
         });
     }
     void OnDestroy()

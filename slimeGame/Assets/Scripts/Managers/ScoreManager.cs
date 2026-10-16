@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -118,10 +116,10 @@ public class ScoreManager : MonoBehaviour
             };
             GameManager.Instance.SaveScore(data);
 
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
             Time.timeScale = 1f;
         });
-        exitButton.onClick.AddListener(()=> {SceneManager.LoadScene(1); Time.timeScale = 1f;});
+        exitButton.onClick.AddListener(()=> {SceneManager.LoadScene(0); Time.timeScale = 1f;});
     }
 
     private bool IsValidName(string name)

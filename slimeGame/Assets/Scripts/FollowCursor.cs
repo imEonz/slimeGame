@@ -21,8 +21,13 @@ public class FollowCursor : MonoBehaviour
 
     void Update()
     {
-        if(player.AutoAim) image.sprite = auto;
-        else image.sprite = aiming;
+        if(player != null)
+        {
+            if(player.AutoAim) image.sprite = auto;
+            else image.sprite = aiming;
+        }
+        else image.sprite = auto;
+
 
         Camera cam = canvas.worldCamera != null ? canvas.worldCamera : Camera.main;
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum StatType {MaxHP, DMG, Speed, Dash, DashCooldown, Firerate}
