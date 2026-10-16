@@ -23,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
     private float yRange;
 
     [SerializeField]
-    private List<EnemyData> spawnableEnemies;
+    private EnemyData[] spawnableEnemies;
 
     private Transform player;
 
@@ -38,6 +38,17 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField]
     public float DifficultyMultiplier => Mathf.Pow(1.5f, time / doublingTime);
+
+    void Awake()
+    {
+        spawnableEnemies = Resources.LoadAll<EnemyData>("EnemyDatas");
+
+        if (spawnableEnemies.Length == 0)
+        {
+            Debug.LogError("EnemySpawner: no EnemyData found in Resources/EnemyDatas. Spawning disabled.");
+            isOn = false;
+        }
+    }
 
     void Start()
     {
@@ -84,7 +95,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, enemiesFolder, true);
             EnemyPreSpawn enemyScript = enemy.GetComponent<EnemyPreSpawn>();
             enemyScript.RandomPosition(spawnPos);
-            enemyScript.InitializePreSpawn(spawnableEnemies[Random.Range(0,spawnableEnemies.Count)], em, DifficultyMultiplier);
+            enemyScript.InitializePreSpawn(spawnableEnemies[Random.Range(0, spawnableEnemies.Length)], em, DifficultyMultiplier);
         }
     }
 }

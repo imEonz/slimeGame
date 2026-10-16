@@ -21,8 +21,6 @@ public class EnemyData : ScriptableObject
     [SerializeField]
     private Sprite sprite;
     [SerializeField]
-    private AnimationClip walkAnim;
-    [SerializeField]
     private List<EnemyLoot> lootTable = new List<EnemyLoot>();
     [SerializeField]
     private EnemyBehaviour enemyBehaviour;
@@ -30,8 +28,6 @@ public class EnemyData : ScriptableObject
     private List<EnemySkill> enemySkills = new List<EnemySkill>();
     [SerializeField]
     private float timeBetweenCasts;
-    [SerializeField]
-    private Vector3 scale;
 
 
     public string EnemyName => enemyName;
@@ -41,11 +37,9 @@ public class EnemyData : ScriptableObject
     public float StaggerChance => staggerChance;
     public float StaggerTime => staggerTime;
     public int Level => level;
-    public Vector3 Scale => scale;
     public List<EnemyLoot> LootTable => lootTable;
     public EnemyBehaviour EnemyBehaviour => enemyBehaviour;
     public List<EnemySkill> EnemySkills => enemySkills;
     public float TimeBetweenCasts => timeBetweenCasts;
     public Sprite EnemySprite => sprite;
-    public AnimationClip WalkAnim => walkAnim;
 }

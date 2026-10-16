@@ -6,10 +6,16 @@ public class OnDeathExplosion : SkillEffect
     [SerializeField] private GameObject explosionPrefab;
     public override void Execute(TriggerContext ctx)
     {
-        if (ctx.type != TriggerType.OnKill) return;
-
         GameObject explosion = Instantiate(explosionPrefab);
         explosion.transform.position = ctx.position;
-        explosion.GetComponent<ExplosionScript>().Init(ctx.enemy.GetMaxHP()/10);
+        if(ctx.enemy != null) 
+        {
+            explosion.GetComponent<ExplosionScript>().Init(ctx.enemy.GetMaxHP()/10);
+            return;
+        }
+        else
+        {
+            explosion.GetComponent<ExplosionScript>().Init(50);
+        }
     }
 }

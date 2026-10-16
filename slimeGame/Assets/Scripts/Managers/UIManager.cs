@@ -52,6 +52,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider skillXpSlider;
     [SerializeField] private GameObject skillButton;
 
+    private Canvas canvas;
+
     private SkillManager skillManager;
 
     void Start()
@@ -65,6 +67,7 @@ public class UIManager : MonoBehaviour
         weaponManager = FindAnyObjectByType<WeaponManager>();
         xpSlider = gameCanvas.Find("XPSlider").GetComponent<Slider>();
         skillManager = FindAnyObjectByType<SkillManager>();
+        canvas = gameCanvas.parent.GetComponent<Canvas>();
 
         foreach (Transform child in weaponHolder)
         {
@@ -98,12 +101,14 @@ public class UIManager : MonoBehaviour
             pauseCanvas.gameObject.SetActive(true);
             Time.timeScale = 0f;
             uIState = UIState.pause;
+            player.AnimatorTimeScale(true);
         }
         else
         {
             pauseCanvas.gameObject.SetActive(false);
             if(player.GetPlayerState() != PlayerController.State.Consuming) Time.timeScale = 1f;
             uIState = UIState.idle;
+            player.AnimatorTimeScale(false);
         }
     }
 
@@ -117,12 +122,14 @@ public class UIManager : MonoBehaviour
             tabCanvas.gameObject.SetActive(true);
             Time.timeScale = 0f;
             uIState = UIState.tab;
+            player.AnimatorTimeScale(true);
         }
         else
         {
             tabCanvas.gameObject.SetActive(false);
             if(player.GetPlayerState() != PlayerController.State.Consuming) Time.timeScale = 1f;
             uIState = UIState.idle;
+            player.AnimatorTimeScale(false);
         }
     }
     public void ActivateLevel()
@@ -133,12 +140,15 @@ public class UIManager : MonoBehaviour
             levelCanvas.GetComponent<Animator>().Play("OnLevelUp");
             Time.timeScale = 0f;
             uIState = UIState.level;
+            player.AnimatorTimeScale(true);
+
         }
         else
         {
             levelCanvas.gameObject.SetActive(false);
             if(player.GetPlayerState() != PlayerController.State.Consuming) Time.timeScale = 1f;
             uIState = UIState.idle;
+            player.AnimatorTimeScale(false);
         }
     }
 

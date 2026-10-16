@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms;
 
 public class PlayerController : MonoBehaviour, IDamagable
 {
@@ -469,6 +470,7 @@ public class PlayerController : MonoBehaviour, IDamagable
         playerState = State.Dead;
         Time.timeScale = 0f;
         gameOverPanel.gameObject.SetActive(true);
+        playerAnimator.updateMode = AnimatorUpdateMode.Normal;
     }
 
     private IEnumerator HitFlash()
@@ -479,5 +481,11 @@ public class PlayerController : MonoBehaviour, IDamagable
         spriteRenderer.color = originalColor;
         isFlashing = false;
         hitFlashCoroutine = null;
+    }
+
+    public void AnimatorTimeScale(bool ison)
+    {
+        if(ison) playerAnimator.updateMode = AnimatorUpdateMode.Normal;
+        else playerAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
 }

@@ -50,7 +50,6 @@ public class Enemy : MonoBehaviour, IDamagable
     [SerializeField]
     public SpriteRenderer sprite;
 
-    private bool isFlashing = false;
     private Coroutine hitFlashCoroutine;
     private float hitFlashDuration = 0.15f;
 
@@ -166,14 +165,12 @@ public class Enemy : MonoBehaviour, IDamagable
         speed = enemyData.Speed;
         staggerChance = enemyData.StaggerChance;
         staggerTime = enemyData.StaggerTime;
-        level = enemyData.Level;
+        level = enemyData.Level * (int)dm;
         lootTable = enemyData.LootTable;
         spriteRenderer.sprite = enemyData.EnemySprite;
         timeBetweenCasts = enemyData.TimeBetweenCasts;
 
 
-
-        transform.localScale = enemyData.Scale;
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -238,11 +235,9 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private IEnumerator HitFlash()
     {
-        isFlashing = true;
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(hitFlashDuration);
         spriteRenderer.color = originalColor;
-        isFlashing = false;
         hitFlashCoroutine = null;
     }
 
