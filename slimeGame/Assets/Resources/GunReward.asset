@@ -16,14 +16,18 @@ MonoBehaviour:
   icon: {fileID: 0}
   maxLevel: 5
   curLevel: 1
+  bio: 
   weaponPrefab: {fileID: 1542910341248240082, guid: 5e94c9d225a7d604aa6225a7aa42ea6d, type: 3}
-  baseDamage: 20
+  baseDamage: 30
   baseFireRate: 1
   onLevelUps:
   - level: 2
     rewards:
     - type: 0
-      value: 25
+      value: 37.5
+      sprite: {fileID: 0}
+    - type: 1
+      value: 0.9
       sprite: {fileID: 0}
   - level: 3
     rewards:
@@ -31,7 +35,7 @@ MonoBehaviour:
       value: 1
       sprite: {fileID: 0}
     - type: 0
-      value: 30
+      value: 40
       sprite: {fileID: 0}
     - type: 1
       value: 0.75
@@ -39,7 +43,7 @@ MonoBehaviour:
   - level: 4
     rewards:
     - type: 0
-      value: 35
+      value: 45
       sprite: {fileID: 0}
   - level: 5
     rewards:
@@ -47,7 +51,7 @@ MonoBehaviour:
       value: 2
       sprite: {fileID: 0}
     - type: 0
-      value: 40
+      value: 50
       sprite: {fileID: 0}
     - type: 1
       value: 0.5

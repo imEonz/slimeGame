@@ -151,7 +151,11 @@ public class PlayerLeveler : MonoBehaviour
             GameObject card = Instantiate(cardObject, cardHolder);
             LevelReward random = new LevelReward();
             random.rewardRarity = SetRarity();
-            random.rewardType = types[Random.Range(0, types.Length)];
+            if(firerateMult > 0.1f)
+            {
+                random.rewardType = types[Random.Range(0, types.Length)];
+            }
+            else random.rewardType = types[Random.Range(0, types.Length-1)];
             random.amount = RollAmount(random.rewardType, random.rewardRarity);
             InitializeStrings(random);
             InitializeCardGO(card, random);

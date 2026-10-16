@@ -15,8 +15,6 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float maxCursorOffset = 2f;
     [SerializeField] private float cursorOffsetSmoothTime = 0.3f;
     private Camera cam;
-
-    private Vector3 Pos;
     private Coroutine shakeRoutine;
 
     private Vector3 velocity = Vector3.zero;
@@ -25,7 +23,7 @@ public class CameraFollow : MonoBehaviour
     private Vector3 cursorOffsetVelocity = Vector3.zero;
 
     private float startSize;
-    private float maxZoom = 1.4f;
+    private float maxZoom = 1.45f;
 
     void Awake()
     {

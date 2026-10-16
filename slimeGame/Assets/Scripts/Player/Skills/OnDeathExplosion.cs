@@ -10,7 +10,7 @@ public class OnDeathExplosion : SkillEffect
         explosion.transform.position = ctx.position;
         if(ctx.enemy != null) 
         {
-            explosion.GetComponent<ExplosionScript>().Init(ctx.enemy.GetMaxHP()/10);
+            explosion.GetComponent<ExplosionScript>().Init(ctx.enemy.GetMaxHP()/3.5f);
             return;
         }
         else
